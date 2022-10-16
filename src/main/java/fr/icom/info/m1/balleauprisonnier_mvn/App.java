@@ -24,7 +24,7 @@ public class App extends Application
 	public void start(Stage stage) throws Exception 
 	{
 		// Nom de la fenetre
-        stage.setTitle("BalleAuPrisonnier");
+        stage.setTitle("Dodgeball");
 
         Group root = new Group();
         Scene scene = new Scene( root );
@@ -32,8 +32,9 @@ public class App extends Application
         // On cree le terrain de jeu et on l'ajoute a la racine de la scene
         Field gameField = new Field(scene, 600, 600 );
         root.getChildren().add( gameField );
-		root.getChildren().add(gameField.getJoueurs()[0].sprite);
-		root.getChildren().add(gameField.getJoueurs()[1].sprite);
+		for (Player p : gameField.getPlayers()) {
+			root.getChildren().add(p.sprite);
+		}
 
         // On ajoute la scene a la fenetre et on affiche
         stage.setScene( scene );

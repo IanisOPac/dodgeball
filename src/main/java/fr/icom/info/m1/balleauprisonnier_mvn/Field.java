@@ -2,6 +2,7 @@ package fr.icom.info.m1.balleauprisonnier_mvn;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
@@ -16,9 +17,9 @@ import javafx.scene.paint.Color;
  * 
  */
 public class Field extends Canvas {
-	
-	/** Joueurs */
-	Player [] joueurs = new Player[2];
+
+	Player[] team1 = new Player[3];
+	Player[] team2 = new Player[3];
 	/** Couleurs possibles */
 	String[] colorMap = new String[] {"blue", "green", "orange", "purple", "yellow"};
 	/** Tableau traçant les evenements */
@@ -36,8 +37,7 @@ public class Field extends Canvas {
      * @param w largeur du canvas
      * @param h hauteur du canvas
      */
-	public Field(Scene scene, int w, int h) 
-	{
+	public Field(Scene scene, int w, int h) {
 		super(w, h); 
 		width = w;
 		height = h;
@@ -48,11 +48,13 @@ public class Field extends Canvas {
         gc = this.getGraphicsContext2D();
         
         /** On initialise le terrain de jeu */
-    	joueurs[0] = new Player(gc, colorMap[0], w/2, h-50, "bottom");
-    	joueurs[0].display();
+		team1[1] = new AI(gc, colorMap[0], w/4, h-50, "bottom");
+		team1[2] = new AI(gc, colorMap[0], 3*w/4, h-50, "bottom");
+		team1[0] = new Player(gc, colorMap[0], w/2, h-50, "bottom");
 
-    	joueurs[1] = new Player(gc, colorMap[1], w/2, 20, "top");
-    	joueurs[1].display();
+		team2[1] = new AI(gc, colorMap[1], w/4, 20, "top");
+		team2[2] = new AI(gc, colorMap[1], 3*w/4, 20, "top");
+		team2[0] = new Player(gc, colorMap[1], w/2, 20, "top");
 
 
 	    /** 
@@ -95,65 +97,53 @@ public class Field extends Canvas {
 	     * soit environ 60 fois par seconde.
 	     * 
 	     */
-	    new AnimationTimer() 
-	    {
-	        public void handle(long currentNanoTime)
-	        {	 
+	    new AnimationTimer() {
+	        public void handle(long currentNanoTime) {
 	            // On nettoie le canvas a chaque frame
 	            gc.setFill( Color.LIGHTGRAY);
 	            gc.fillRect(0, 0, width, height);
 	        	
-	            // Deplacement et affichage des joueurs
-	        	for (int i = 0; i < joueurs.length; i++) 
-	    	    {
-	        		if (i==0 && input.contains("LEFT"))
-	        		{
-	        			joueurs[i].moveLeft();
-	        		} 
-	        		if (i==0 && input.contains("RIGHT")) 
-	        		{
-	        			joueurs[i].moveRight();	        			
-	        		}
-	        		if (i==0 && input.contains("UP"))
-	        		{
-	        			joueurs[i].turnLeft();
-	        		} 
-	        		if (i==0 && input.contains("DOWN")) 
-	        		{
-	        			joueurs[i].turnRight();	        			
-	        		}
-	        		if (i==1 && input.contains("Q"))
-	        		{
-	        			joueurs[i].moveLeft();
-	        		} 
-	        		if (i==1 && input.contains("D")) 
-	        		{
-	        			joueurs[i].moveRight();	        			
-	        		}
-	        		if (i==1 && input.contains("Z"))
-	        		{
-	        			joueurs[i].turnLeft();
-	        		} 
-	        		if (i==1 && input.contains("S")) 
-	        		{
-	        			joueurs[i].turnRight();	        			
-	        		}
-					if (input.contains("SPACE")){
-						joueurs[1].shoot();
-					}
-					if (input.contains("ENTER")){
-						joueurs[0].shoot();
-					}
-
-	        		
-	        		joueurs[i].display();
-	    	    }
-	    	}
+	            if (input.contains("LEFT")) {
+					team1[0].moveLeft();
+				}
+				if (input.contains("RIGHT")) {
+					team1[0].moveRight();
+				}
+				if (input.contains("UP")) {
+					team1[0].turnLeft();
+				}
+				if (input.contains("DOWN")) {
+					team1[0].turnRight();
+				}
+				if (input.contains("Q")) {
+					team2[0].moveLeft();
+				}
+				if (input.contains("D")) {
+					team2[0].moveRight();
+				}
+				if (input.contains("Z")) {
+					team2[0].turnLeft();
+				}
+				if (input.contains("S")) {
+					team2[0].turnRight();
+				}
+				if (input.contains("SPACE")) {
+					team2[0].shoot();
+				}
+				if (input.contains("ENTER")) {
+					team1[0].shoot();
+				}
+				for (Player p : getPlayers()) {
+					p.display();
+				}
+			}
 	     }.start(); // On lance la boucle de rafraichissement 
 	     
 	}
 
-	public Player[] getJoueurs() {
-		return joueurs;
+	public Player[] getPlayers() {
+		Player[] result = Arrays.copyOf(team1, team1.length + team2.length);
+		System.arraycopy(team2, 0, result, team1.length, team2.length);
+		return result;
 	}
 }

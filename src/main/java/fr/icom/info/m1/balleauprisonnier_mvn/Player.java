@@ -38,7 +38,7 @@ public class Player
 	  Player(GraphicsContext gc, String color, int xInit, int yInit, String side)
 	  {
 		// Tous les joueurs commencent au centre du canvas, 
-	    x = xInit;               
+	    x = xInit - 32;
 	    y = yInit;
 	    graphicsContext = gc;
 	    playerColor=color;
@@ -68,7 +68,7 @@ public class Player
 
 	    // Tous les joueurs ont une vitesse aleatoire entre 0.0 et 1.0
         Random randomGenerator = new Random();
-        step = 0.6 + 2 * (randomGenerator.nextFloat()) / 5;
+        step = 3 + randomGenerator.nextFloat() / 2;
 
         // Pour commencer les joueurs ont une vitesse / un pas fixe
 		// step = 1;
@@ -93,10 +93,9 @@ public class Player
 	  /**
 	   *  Deplacement du joueur vers la gauche, on cantonne le joueur sur le plateau de jeu
 	   */
-	 
 	  void moveLeft() 
 	  {	    
-	    if (x > 10 && x < 520) 
+	    if (x > 10)
 	    {
 			spriteAnimate();
 		    x -= step;
@@ -108,7 +107,7 @@ public class Player
 	   */
 	  void moveRight() 
 	  {
-	    if (x > 10 && x < 520) 
+	    if (x < 520)
 	    {
 			spriteAnimate();
 		    x += step;

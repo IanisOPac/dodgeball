@@ -6,6 +6,7 @@ import javafx.scene.transform.Rotate;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
+import java.util.Random;
 
 /**
  * 
@@ -66,12 +67,11 @@ public class Player
         //directionArrow = sprite.getClip().;
 
 	    // Tous les joueurs ont une vitesse aleatoire entre 0.0 et 1.0
-        // Random randomGenerator = new Random();
-        // step = randomGenerator.nextFloat();
+        Random randomGenerator = new Random();
+        step = 0.6 + 2 * (randomGenerator.nextFloat()) / 5;
 
         // Pour commencer les joueurs ont une vitesse / un pas fixe
-        step = 1;
-	    
+		// step = 1;
 	  }
 
 	  /**

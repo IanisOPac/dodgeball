@@ -103,17 +103,20 @@ public class Field extends Canvas {
 	            gc.setFill( Color.LIGHTGRAY);
 	            gc.fillRect(0, 0, width, height);
 	        	
-	            if (input.contains("LEFT")) {
+	            if (input.contains("K")) {
 					team1[0].moveLeft();
 				}
-				if (input.contains("RIGHT")) {
+				if (input.contains("M")) {
 					team1[0].moveRight();
 				}
-				if (input.contains("UP")) {
+				if (input.contains("RIGHT")) {
 					team1[0].turnLeft();
 				}
-				if (input.contains("DOWN")) {
+				if (input.contains("LEFT")) {
 					team1[0].turnRight();
+				}
+				if (input.contains("L")) {
+					team1[0].shoot();
 				}
 				if (input.contains("Q")) {
 					team2[0].moveLeft();
@@ -121,17 +124,14 @@ public class Field extends Canvas {
 				if (input.contains("D")) {
 					team2[0].moveRight();
 				}
-				if (input.contains("Z")) {
+				if (input.contains("B")) {
 					team2[0].turnLeft();
 				}
-				if (input.contains("S")) {
+				if (input.contains("N")) {
 					team2[0].turnRight();
 				}
 				if (input.contains("SPACE")) {
 					team2[0].shoot();
-				}
-				if (input.contains("ENTER")) {
-					team1[0].shoot();
 				}
 				for (Player p : getPlayers()) {
 					p.display();

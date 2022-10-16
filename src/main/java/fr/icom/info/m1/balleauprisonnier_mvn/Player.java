@@ -27,6 +27,8 @@ public class Player
 	  ImageView PlayerDirectionArrow;
 	  
 	  GraphicsContext graphicsContext;
+	  Projectile p;
+	  int side = -1;
 	  
 	  /**
 	   * Constructeur du Joueur
@@ -35,7 +37,7 @@ public class Player
 	   * @param color couleur du joueur
 	   * @param yInit position verticale
 	   */
-	  Player(GraphicsContext gc, String color, int xInit, int yInit, String side)
+	  Player(GraphicsContext gc, String color, int xInit, int yInit, String _side)
 	  {
 		// Tous les joueurs commencent au centre du canvas, 
 	    x = xInit - 32;
@@ -46,7 +48,8 @@ public class Player
 	    angle = 0;
 
 	    // On charge la representation du joueur
-        if(side=="top"){
+        if(_side=="top"){
+			side = -side;
         	directionArrow = new Image("assets/PlayerArrowDown.png");
 		}
 		else{
@@ -61,7 +64,7 @@ public class Player
         PlayerDirectionArrow.setCache(true);
 
         Image tilesheetImage = new Image("assets/orc.png");
-        sprite = new Sprite(tilesheetImage, 0,0, Duration.seconds(.2), side);
+        sprite = new Sprite(tilesheetImage, 0,0, Duration.seconds(.2), _side);
         sprite.setX(x);
         sprite.setY(y);
         //directionArrow = sprite.getClip().;
@@ -83,6 +86,7 @@ public class Player
 	      rotate(graphicsContext, angle, x + directionArrow.getWidth() / 2, y + directionArrow.getHeight() / 2);
 		  graphicsContext.drawImage(directionArrow, x, y);
 		  graphicsContext.restore(); // back to original state (before rotation)
+		  if (p != null) p.display();
 	  }
 
 	  private void rotate(GraphicsContext gc, double angle, double px, double py) {
@@ -93,8 +97,7 @@ public class Player
 	  /**
 	   *  Deplacement du joueur vers la gauche, on cantonne le joueur sur le plateau de jeu
 	   */
-	  void moveLeft() 
-	  {	    
+	  void moveLeft() {
 	    if (x > 10)
 	    {
 			spriteAnimate();
@@ -105,8 +108,7 @@ public class Player
 	  /**
 	   *  Deplacement du joueur vers la droite
 	   */
-	  void moveRight() 
-	  {
+	  void moveRight() {
 	    if (x < 520)
 	    {
 			spriteAnimate();
@@ -118,36 +120,22 @@ public class Player
 	  /**
 	   *  Rotation du joueur vers la gauche
 	   */
-	  void turnLeft() 
-	  {
-	    if (angle > 0 && angle < 180) 
-	    {
-	    	angle += 1;
-	    }
-	    else {
-	    	angle += 1;
-	    }
-
+	  void turnLeft() {
+		  if (angle < 45) angle += 1;
 	  }
 
 	  
 	  /**
 	   *  Rotation du joueur vers la droite
 	   */
-	  void turnRight() 
-	  {
-	    if (angle > 0 && angle < 180) 
-	    {
-	    	angle -=1;
-	    }
-	    else {
-	    	angle -= 1;
-	    }
+	  void turnRight() {
+		  if (angle > -45) angle -=1;
 	  }
 
 
 	  void shoot(){
-	  	sprite.playShoot();
+		  sprite.playShoot();
+		  p = new Projectile(graphicsContext, x, y, angle + 90 * side);
 	  }
 	  
 	  /**

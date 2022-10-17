@@ -3,12 +3,12 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class Projectile {
-    double speed, x, y, rad_angle, x_velocity, y_velocity;
+    double speed = 5;
+    double x, y, rad_angle, x_velocity, y_velocity;
     GraphicsContext gc;
     Image image = new Image("assets/ball.png");
 
     public Projectile(GraphicsContext _gc, double _x, double _y, double _angle) {
-        speed = 5;
         x = _x;
         y = _y;
         rad_angle = _angle * Math.PI / 180;

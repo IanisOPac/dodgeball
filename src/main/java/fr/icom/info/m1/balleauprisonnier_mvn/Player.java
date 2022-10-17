@@ -37,8 +37,7 @@ public class Player
 	   * @param color couleur du joueur
 	   * @param yInit position verticale
 	   */
-	  Player(GraphicsContext gc, String color, int xInit, int yInit, String _side)
-	  {
+	  Player(GraphicsContext gc, String color, int xInit, int yInit, String _side) {
 		// Tous les joueurs commencent au centre du canvas, 
 	    x = xInit - 32;
 	    y = yInit;

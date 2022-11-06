@@ -1,6 +1,6 @@
-package fr.icom.info.m1.balleauprisonnier_mvn;
-
-
+package Model;
+import Controller.GameController;
+import Controller.PlayerController;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -17,7 +17,6 @@ public class App extends Application
 	 * En javafx start() lance l'application
 	 *
 	 * On cree le SceneGraph de l'application ici
-	 * @see http://docs.oracle.com/javafx/2/scenegraph/jfxpub-scenegraph.htm
 	 * 
 	 */
 	@Override
@@ -27,17 +26,17 @@ public class App extends Application
         stage.setTitle("Dodgeball");
 
         Group root = new Group();
-        Scene scene = new Scene( root );
+        Scene scene = new Scene(root);
 
         // On cree le terrain de jeu et on l'ajoute a la racine de la scene
-        Field gameField = new Field(scene, 600, 600 );
-        root.getChildren().add( gameField );
-		for (Player p : gameField.getPlayers()) {
-			root.getChildren().add(p.sprite);
+        GameController gameC = new GameController();
+        root.getChildren().add(gameC);
+		for (PlayerController p : gameC.getPlayers()) {
+			root.getChildren().add(p.getSprite());
 		}
 
         // On ajoute la scene a la fenetre et on affiche
-        stage.setScene( scene );
+        stage.setScene(scene);
         stage.show();
 	}
 	

@@ -9,7 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
-class Sprite extends ImageView {
+public class Sprite extends ImageView {
     private final Rectangle2D[] walkClips;
     private final Rectangle2D[] shootClips;
     private int numCells;

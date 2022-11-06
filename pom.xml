@@ -2,12 +2,12 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>fr.icom.info.m1.</groupId>
-  <artifactId>balleauprisonnier_mvn</artifactId>
+  <groupId>.</groupId>
+  <artifactId>Model</artifactId>
   <version>0.0.1</version>
   <packaging>jar</packaging>
 
-  <name>balleauprisonnier_mvn</name>
+  <name>Dodgeball</name>
   <url>http://maven.apache.org</url>
 
   <properties>
@@ -48,7 +48,7 @@
         <artifactId>javafx-maven-plugin</artifactId>
         <version>0.0.8</version>
         <configuration>
-          <mainClass>fr.icom.info.m1.balleauprisonnier_mvn.App</mainClass>
+          <mainClass>Model.App</mainClass>
         </configuration>
       </plugin>
     </plugins>

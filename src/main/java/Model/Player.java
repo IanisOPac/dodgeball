@@ -1,15 +1,15 @@
 package Model;
 import java.util.Random;
 
-public abstract class Player {
+public class Player {
     private double x, y, speed, angle;
     private String color;
     private int side = -1;
 
-    Player(int xInit, int yInit, String _side, String _color) {
+    public Player(int _x, int _y, String _side, String _color) {
         // Tous les joueurs commencent au centre du canvas,
-        x = xInit - 32;
-        y = yInit;
+        x = _x - 32;
+        y = _y;
         color=_color;
 
         angle = 0;
@@ -29,7 +29,7 @@ public abstract class Player {
     }
 
     public void moveRight() {
-        if (x > 10) x -= speed;
+        if (x < 580) x += speed;
     }
 
     public void turnLeft() {
@@ -52,5 +52,20 @@ public abstract class Player {
      */
     void boost() {
         x += speed*2;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public double getY() {
+        return y;
+    }
+
+    public double getAngle() {
+        return angle;
+    }
+    public double getShootAngle() {
+        return angle + 90 * side;
     }
 }

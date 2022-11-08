@@ -42,6 +42,6 @@ public class PlayerController {
 
     public void display() {
         view.display(model.getX(), model.getY(), model.getAngle());
-        if (projectile != null) projectile.display();
+//        if (projectile != null) projectile.display();
     }
 }

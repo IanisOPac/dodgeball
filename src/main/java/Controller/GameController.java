@@ -11,6 +11,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
+import java.util.Random;
 
 /**
  * Classe gerant le terrain de jeu.
@@ -30,7 +31,16 @@ public class GameController extends Canvas {
 		gc = this.getGraphicsContext2D();
 		this.setFocusTraversable(true);
 		gameModel = new Game(gc, Constant.WINDOW_WIDTH, Constant.WINDOW_HEIGHT);
-        /** 
+		Random rand = new Random();
+		int startingTeam = rand.nextInt(2);
+		if(startingTeam == 0){
+			startingTeam = -1;
+		}
+		double angle = rand.nextDouble(-45, 45);
+		System.out.println(startingTeam);
+		projectile = new ProjectileController(gc, Constant.WINDOW_WIDTH/2, Constant.WINDOW_HEIGHT/2, 90*startingTeam+angle);
+
+		/**
 	     * Event Listener du clavier 
 	     * quand une touche est pressee on la rajoute a la liste d'input
 	     *   
@@ -111,6 +121,7 @@ public class GameController extends Canvas {
 				for (PlayerController p : getPlayers()) {
 					p.display();
 				}
+				projectile.display();
 			}
 	     }.start(); // On lance la boucle de rafraichissement
 	    

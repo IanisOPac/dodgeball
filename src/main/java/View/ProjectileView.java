@@ -1,11 +1,12 @@
 package View;
 
+import Util.Constant;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class ProjectileView {
     GraphicsContext gc;
-    Image image = new Image("assets/ball.png");
+    Image image = new Image("assets/ball.png", Constant.BALL_SIZE, Constant.BALL_SIZE, false, false);
 
     public ProjectileView(GraphicsContext _gc) {
         gc = _gc;

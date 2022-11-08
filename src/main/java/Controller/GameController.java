@@ -38,7 +38,7 @@ public class GameController extends Canvas {
 		}
 		double angle = rand.nextDouble(-45, 45);
 		System.out.println(startingTeam);
-		projectile = new ProjectileController(gc, Constant.WINDOW_WIDTH/2, Constant.WINDOW_HEIGHT/2, 90*startingTeam+angle);
+		projectile = new ProjectileController(gc, Constant.WINDOW_WIDTH/2 - Constant.BALL_SIZE / 2, Constant.WINDOW_HEIGHT/2 - Constant.BALL_SIZE / 2, 23);
 
 		/**
 	     * Event Listener du clavier 

@@ -19,14 +19,8 @@ public class Projectile {
     }
 
     public double posX() {
-        if (isOutOfBound()) {
-            if(angle > 90){
-                angle -= 90;
-            }
-            else {
-                angle +=90;
-            }
-
+        if (collidingWall()) {
+            angle = 180 - angle;
             updateAngle();
         }
         x += x_velocity * speed;
@@ -34,15 +28,17 @@ public class Projectile {
     }
     
     public double posY() {
+        if (collidingSide()) speed = 0;
         y += y_velocity * speed;
         return y;
     }
 
-    private boolean isOutOfBound() {
-        if(this.x > Constant.WINDOW_WIDTH || this.x < Constant.WINDOW_HEIGHT){
-            return true;
-        }
-        return false;
+    private boolean collidingWall() {
+        return this.x + Constant.BALL_SIZE > Constant.WINDOW_WIDTH || this.x < 0;
+    }
+
+    private boolean collidingSide() {
+        return this.y + Constant.BALL_SIZE > Constant.WINDOW_HEIGHT || this.y < 0;
     }
 
 }

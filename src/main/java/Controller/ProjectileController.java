@@ -28,8 +28,8 @@ public class ProjectileController {
         return model.position();
     }
 
-    public void move(double angle, int side) {
-        model.move(angle, side);
+    public void move(double angle) {
+        model.move(angle);
     }
 
     public boolean idling() {
@@ -38,5 +38,9 @@ public class ProjectileController {
 
     public int getSide() {
         return model.getSide();
+    }
+
+    public void grabbed(int side) {
+        model.setSide(side);
     }
 }

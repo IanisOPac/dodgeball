@@ -139,6 +139,7 @@ public class GameController extends Canvas {
 			if (rectCollide(projPos, pPos)) {
 				if (projectile.idling()) {
 					p.setHolding(true);
+					projectile.grabbed(p.getSide());
 				}
 				else if (projectile.getSide() != p.getSide()) {
 					System.out.println("DEAD DEAD DEAD DEAD DEAD!!!!!!!!!!!!");

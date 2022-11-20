@@ -6,16 +6,14 @@ import java.util.Random;
 
 public class Player {
     private double x, y, speed, base_angle, angle;
-    private String color;
     private int side = -1;
     private boolean alive = true;
     private boolean holding = false;
 
-    public Player(int _x, int _y, String _side, String _color) {
+    public Player(int _x, int _y, String _side) {
         // Tous les joueurs commencent au centre du canvas,
         x = _x - 32;
         y = _y;
-        color=_color;
 
         base_angle = 0;
 

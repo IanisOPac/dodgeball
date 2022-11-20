@@ -9,7 +9,7 @@ public class Game {
     PlayerController[] team1 = new PlayerController[Constant.TEAM_SIZE];
 	PlayerController[] team2 = new PlayerController[Constant.TEAM_SIZE];
 	/** Couleurs possibles */
-	String[] colorMap = new String[] {"blue", "green", "orange", "purple", "yellow"};
+	String[] colorMap = new String[] {"Blue", "Red"};
 	/** Tableau traçant les evenements */
     final int width;
     final int height;

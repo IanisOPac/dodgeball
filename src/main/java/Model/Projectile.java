@@ -47,11 +47,10 @@ public class Projectile {
         this.y = y;
     }
 
-    public void move(double angle, int side) {
+    public void move(double angle) {
         this.angle = angle;
         updateAngle();
         speed = 5;
-        this.side = side;
     }
 
     public Point position() {
@@ -74,4 +73,7 @@ public class Projectile {
         return side;
     }
 
+    public void setSide(int _side) {
+        side = _side;
+    }
 }

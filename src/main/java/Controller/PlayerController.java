@@ -14,8 +14,8 @@ public class PlayerController {
 
     public PlayerController(GraphicsContext gc, int x, String side, String color) {
         int y = side == "top" ? 0 : Constant.WINDOW_HEIGHT - Constant.PLAYER_HEIGHT;
-        view = new PlayerView(gc, x, y, side);
-        model = new Player(x, y, side, color);
+        view = new PlayerView(gc, x, y, side, color);
+        model = new Player(x, y, side);
     }
 
     public Sprite getSprite() {
@@ -40,7 +40,7 @@ public class PlayerController {
 
     public void shoot(ProjectileController proj) {
         System.out.println(model.getShootAngle());
-        proj.move(model.getShootAngle(), model.getSide());
+        proj.move(model.getShootAngle());
         view.shoot();
     }
 

@@ -19,7 +19,7 @@ public class PlayerView {
      * @param y position joueur
      * @param x position joueur
      */
-    public PlayerView(GraphicsContext gc, int x, int y, String _side) {
+    public PlayerView(GraphicsContext gc, int x, int y, String _side, String color) {
         // Tous les joueurs commencent au centre du canvas,
         graphicsContext = gc;
 
@@ -33,7 +33,7 @@ public class PlayerView {
         PlayerDirectionArrow.setSmooth(true);
         PlayerDirectionArrow.setCache(true);
 
-        Image tilesheetImage = new Image("assets/orc.png");
+        Image tilesheetImage = new Image("assets/Player"+ color +".png");
         sprite = new Sprite(tilesheetImage, 0,0, Duration.seconds(.2), _side);
         sprite.setX(x);
         sprite.setY(y);

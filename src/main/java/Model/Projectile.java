@@ -1,9 +1,12 @@
 package Model;
 import Util.Constant;
 
+import java.awt.*;
+
 public class Projectile {
     double speed = Constant.PROJECTILE_SPEED;
     double x, y, angle, x_velocity, y_velocity;
+    int side = 0;
 
     public Projectile(double _x, double _y, double _angle) {
         x = _x;
@@ -28,9 +31,35 @@ public class Projectile {
     }
     
     public double posY() {
-        if (collidingSide()) speed = 0;
+        if (collidingSide()) {
+            speed = 0;
+            side = 0;
+        }
         y += y_velocity * speed;
         return y;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public void move(double angle, int side) {
+        this.angle = angle;
+        updateAngle();
+        speed = 5;
+        this.side = side;
+    }
+
+    public Point position() {
+        return new Point((int) x,(int) y);
+    }
+
+    public boolean idling() {
+        return side == 0;
     }
 
     private boolean collidingWall() {
@@ -39,6 +68,10 @@ public class Projectile {
 
     private boolean collidingSide() {
         return this.y + Constant.BALL_SIZE > Constant.WINDOW_HEIGHT || this.y < 0;
+    }
+
+    public int getSide() {
+        return side;
     }
 
 }

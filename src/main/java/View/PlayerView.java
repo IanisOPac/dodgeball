@@ -1,13 +1,10 @@
 package View;
 
-import View.Sprite;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
-
-import java.util.Random;
 
 public class PlayerView {
     Image directionArrow;
@@ -27,12 +24,7 @@ public class PlayerView {
         graphicsContext = gc;
 
         // On charge la representation du joueur
-        if(_side=="top") {
-            directionArrow = new Image("assets/PlayerArrowDown.png");
-        }
-        else {
-            directionArrow = new Image("assets/PlayerArrowUp.png");
-        }
+        directionArrow = new Image("assets/PlayerArrow.png");
 
         PlayerDirectionArrow = new ImageView();
         PlayerDirectionArrow.setImage(directionArrow);
@@ -80,4 +72,11 @@ public class PlayerView {
         return sprite;
     }
 
+    public void shoot() {
+        sprite.playShoot();
+    }
+
+    public void die() {
+        sprite.playDie();
+    }
 }

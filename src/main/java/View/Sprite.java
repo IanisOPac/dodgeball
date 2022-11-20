@@ -1,5 +1,6 @@
 package View;
 
+import Util.Constant;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
@@ -12,20 +13,24 @@ import javafx.util.Duration;
 public class Sprite extends ImageView {
     private final Rectangle2D[] walkClips;
     private final Rectangle2D[] shootClips;
+    private Rectangle2D[] dieClips;
+    private int numCellsDie;
     private int numCells;
     private int numCellsWalk;
     private int numCellsShoot;
     private final Timeline walkTimeline;
     private final IntegerProperty frameCounter = new SimpleIntegerProperty(0);
     private final Timeline shootTimeline;
+
+    private final Timeline dieTimeline;
     private Timeline timeline;
     public boolean isRunning;
 
     public Sprite(Image animationImage, int numCells, int numRows, Duration frameTime, String side) {
         this.numCells = numCells;
 
-        double cellWidth  = 64;//animationImage.getWidth() / numCells; //64x64
-        double cellHeight = 64;//animationImage.getHeight() / numRows;
+        double cellWidth  = Constant.PLAYER_WIDTH;//animationImage.getWidth() / numCells; //64x64
+        double cellHeight = Constant.PLAYER_HEIGHT;//animationImage.getHeight() / numRows;
 
 
         numCellsWalk = 9;
@@ -70,6 +75,23 @@ public class Sprite extends ImageView {
                     setViewport(shootClips[frameCounter.get()]);
                 }));
 
+        numCellsDie = 6;
+        lineNumber = 20;
+
+        dieClips = new Rectangle2D[numCellsDie];
+        for (int i = 0; i < numCellsDie; i++){
+            dieClips[i] = new Rectangle2D(
+                    i * cellWidth, cellHeight*lineNumber,
+                    cellWidth, cellHeight
+            );
+        }
+
+        dieTimeline = new Timeline(
+                new KeyFrame(frameTime, event -> {
+                    frameCounter.set((frameCounter.get() + 1) % numCellsDie);
+                    setViewport(dieClips[frameCounter.get()]);
+                }));
+
         timeline = walkTimeline;
         isRunning = false;
     }
@@ -92,9 +114,17 @@ public class Sprite extends ImageView {
         timeline.playFromStart();
     }
 
-    public void stop() {
+    public void playDie(){
         frameCounter.set(0);
-        setViewport(walkClips[frameCounter.get()]);
-        walkTimeline.stop();
+        timeline.stop();
+        timeline = dieTimeline;
+        timeline.setCycleCount(numCellsDie);
+        timeline.setOnFinished(e -> stop());
+        timeline.playFromStart();
+    }
+
+    public void stop() {
+        setViewport(dieClips[5]);
+        dieTimeline.stop();
     }
 }

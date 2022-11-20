@@ -31,7 +31,7 @@ public class App extends Application
         // On cree le terrain de jeu et on l'ajoute a la racine de la scene
         GameController gameC = new GameController();
         root.getChildren().add(gameC);
-		for (PlayerController p : gameC.getPlayers()) {
+		for (PlayerController p : gameC.getActivePlayers()) {
 			root.getChildren().add(p.getSprite());
 		}
 

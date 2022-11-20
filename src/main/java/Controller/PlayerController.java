@@ -4,16 +4,17 @@ import View.Sprite;
 
 import View.PlayerView;
 import Model.Player;
+import javafx.geometry.BoundingBox;
+import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
-
-import java.awt.*;
 
 public class PlayerController {
     PlayerView view;
     Player model;
 
     public PlayerController(GraphicsContext gc, int x, String side, String color) {
-        int y = side == "top" ? 0 : Constant.WINDOW_HEIGHT - Constant.PLAYER_HEIGHT;
+        int y = side.equals("top") ? 0 : Constant.WINDOW_HEIGHT - Constant.PLAYER_HEIGHT;
+        x -= Constant.PLAYER_WIDTH / 2; 
         view = new PlayerView(gc, x, y, side, color);
         model = new Player(x, y, side);
     }
@@ -39,13 +40,17 @@ public class PlayerController {
     }
 
     public void shoot(ProjectileController proj) {
-        System.out.println(model.getShootAngle());
+        setHolding(false);
         proj.move(model.getShootAngle());
         view.shoot();
     }
 
-    public Point position() {
+    public Point2D getPosition() {
         return model.getPosition();
+    }
+
+    public BoundingBox getBoundingBox() {
+        return model.getBoundingBox();
     }
 
     public boolean isHolding() {
@@ -57,12 +62,12 @@ public class PlayerController {
     }
 
     public void display() {
-        view.display(model.getX(), model.getY(), model.getAngle());
+        view.display(model.getPosition(), model.getAngle());
     }
 
     public void display(ProjectileController proj) {
         display();
-        proj.setPos(position());
+        proj.setPosition(getPosition());
     }
 
     public int getSide() {

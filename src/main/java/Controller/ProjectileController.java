@@ -2,9 +2,9 @@ package Controller;
 
 import Model.Projectile;
 import View.ProjectileView;
+import javafx.geometry.BoundingBox;
+import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
-
-import java.awt.*;
 
 public class ProjectileController {
     Projectile model;
@@ -19,13 +19,17 @@ public class ProjectileController {
         view.display(model.posX(), model.posY());
     }
 
-    public void setPos(Point pos) {
-        model.setX(pos.x);
-        model.setY(pos.y);
+    public void setPosition(Point2D pos) {
+        model.setX(pos.getX());
+        model.setY(pos.getY());
     }
 
-    public Point position() {
-        return model.position();
+    public Point2D getPosition() {
+        return model.getPosition();
+    }
+
+    public BoundingBox getBoundingBox() {
+        return model.getBoundingBox();
     }
 
     public void move(double angle) {
@@ -40,7 +44,8 @@ public class ProjectileController {
         return model.getSide();
     }
 
-    public void grabbed(int side) {
-        model.setSide(side);
+    public void grabbedBy(PlayerController p) {
+        p.setHolding(true);
+        model.setSide(p.getSide());
     }
 }

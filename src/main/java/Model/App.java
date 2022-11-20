@@ -15,12 +15,11 @@ public class App extends Application
 	
 	/**
 	 * En javafx start() lance l'application
-	 *
 	 * On cree le SceneGraph de l'application ici
 	 * 
 	 */
 	@Override
-	public void start(Stage stage) throws Exception 
+	public void start(Stage stage)
 	{
 		// Nom de la fenetre
         stage.setTitle("Dodgeball");

@@ -1,15 +1,12 @@
 package Controller;
 
-import java.awt.*;
 import java.util.ArrayList;
-
 import Model.Game;
 import Util.Constant;
 import javafx.animation.AnimationTimer;
-import javafx.event.EventHandler;
+import javafx.geometry.BoundingBox;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import java.util.Random;
 
@@ -22,7 +19,6 @@ public class GameController extends Canvas {
 	final GraphicsContext gc;
 	ProjectileController projectile;
 	
-
     /** Tableau traçant les evenements */
     ArrayList<String> input = new ArrayList<>();
 
@@ -47,13 +43,11 @@ public class GameController extends Canvas {
 		 *
 		 */
 		this.setOnKeyPressed(
-				new EventHandler<KeyEvent>() {
-					public void handle(KeyEvent e) {
-						String code = e.getCode().toString();
-						// only add once... prevent duplicates
-						if (!input.contains(code))
-							input.add(code);
-					}
+				e -> {
+					String code = e.getCode().toString();
+					// only add once... prevent duplicates
+					if (!input.contains(code))
+						input.add(code);
 				});
 
 		/**
@@ -62,28 +56,25 @@ public class GameController extends Canvas {
 		 *
 		 */
 		this.setOnKeyReleased(
-				new EventHandler<KeyEvent>() {
-					public void handle(KeyEvent e) {
-						String code = e.getCode().toString();
-						input.remove(code);
-					}
+				e -> {
+					String code = e.getCode().toString();
+					input.remove(code);
 				});
 
 
 		/**
 		 *
 		 * Boucle principale du jeu
-		 *
 		 * handle() est appelee a chaque rafraichissement de frame
 		 * soit environ 60 fois par seconde.
 		 *
 		 */
 		new AnimationTimer() {
-
 			public void handle(long currentNanoTime) {
+				// on nettoie le terrain de jeu
 				gc.setFill(Color.LIGHTGRAY);
 				gc.fillRect(0, 0, Constant.WINDOW_WIDTH, Constant.WINDOW_HEIGHT);
-//	        	System.out.println(input);
+
 				if (input.contains("K")) {
 					gameModel.getTeam1()[0].moveLeft();
 				}
@@ -98,10 +89,7 @@ public class GameController extends Canvas {
 				}
 				if (input.contains("L")) {
 					PlayerController p = gameModel.getTeam1()[0];
-					if (p.isHolding()) {
-						p.setHolding(false);
-						p.shoot(projectile);
-					}
+					if (p.isHolding()) p.shoot(projectile);
 				}
 				if (input.contains("Q")) {
 					gameModel.getTeam2()[0].moveLeft();
@@ -117,10 +105,7 @@ public class GameController extends Canvas {
 				}
 				if (input.contains("SPACE")) {
 					PlayerController p = gameModel.getTeam2()[0];
-					if (p.isHolding()) {
-						p.setHolding(false);
-						p.shoot(projectile);
-					}
+					if (p.isHolding()) p.shoot(projectile);
 				}
 				for (PlayerController p : getActivePlayers()) {
 					if (p.isHolding()) p.display(projectile);
@@ -133,16 +118,12 @@ public class GameController extends Canvas {
 	}
 
 	private void checkCollision() {
-		Point projPos = projectile.position();
+		BoundingBox projBB = projectile.getBoundingBox();
 		for (PlayerController p : getActivePlayers()) {
-			Point pPos = p.position();
-			if (rectCollide(projPos, pPos)) {
-				if (projectile.idling()) {
-					p.setHolding(true);
-					projectile.grabbed(p.getSide());
-				}
+			BoundingBox playerBB = p.getBoundingBox();
+			if (projBB.intersects(playerBB)) {
+				if (projectile.idling()) projectile.grabbedBy(p);
 				else if (projectile.getSide() != p.getSide()) {
-					System.out.println("DEAD DEAD DEAD DEAD DEAD!!!!!!!!!!!!");
 					p.die();
 					gameModel.updateDead();
 				}
@@ -150,11 +131,15 @@ public class GameController extends Canvas {
 		}
 	}
 
-	private boolean rectCollide(Point proj, Point player) {
-		return proj.x + Constant.BALL_SIZE >= player.x &&
-			proj.x <= player.x + Constant.PLAYER_WIDTH &&
-			proj.y + Constant.BALL_SIZE >= player.y &&
-			proj.y <= player.y + Constant.PLAYER_HEIGHT;
+	// private boolean rectCollide(Point2D proj, int proj_size, Point2D player) {
+	// 	return proj.x + Constant.BALL_SIZE >= player.x &&
+	// 		proj.x <= player.x + Constant.PLAYER_WIDTH &&
+	// 		proj.y + Constant.BALL_SIZE >= player.y &&
+	// 		proj.y <= player.y + Constant.PLAYER_HEIGHT;
+	// }
+
+	private boolean checkVictory() {
+		return false;
 	}
 
 	public PlayerController[] getActivePlayers() {

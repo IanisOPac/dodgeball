@@ -1,5 +1,6 @@
 package View;
 
+import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -11,7 +12,6 @@ public class PlayerView {
     Sprite sprite;
     ImageView PlayerDirectionArrow;
     GraphicsContext graphicsContext;
-
     /**
      * Constructeur de l'affichage du joueur
      *
@@ -20,9 +20,9 @@ public class PlayerView {
      * @param x position joueur
      */
     public PlayerView(GraphicsContext gc, int x, int y, String _side, String color) {
+
         // Tous les joueurs commencent au centre du canvas,
         graphicsContext = gc;
-
         // On charge la representation du joueur
         directionArrow = new Image("assets/PlayerArrow.png");
 
@@ -44,14 +44,14 @@ public class PlayerView {
     /**
      *  Affichage de la flèche du joueur
      */
-    public void display(double x, double y, double angle)
+    public void display(Point2D pos, double angle)
     {
         graphicsContext.save(); // saves the current state on stack, including the current transform
-        rotateArrow(graphicsContext, angle, x + directionArrow.getWidth() / 2, y + directionArrow.getHeight() / 2);
-        graphicsContext.drawImage(directionArrow, x, y);
+        rotateArrow(graphicsContext, angle, pos.getX() + directionArrow.getWidth() / 2, pos.getY() + directionArrow.getHeight() / 2);
+        graphicsContext.drawImage(directionArrow, pos.getX(), pos.getY());
         graphicsContext.restore(); // back to original state (before rotation)
-        sprite.setX(x);
-        sprite.setY(y);
+        sprite.setX(pos.getX());
+        sprite.setY(pos.getY());
     }
 
     private void rotateArrow(GraphicsContext gc, double angle, double px, double py) {

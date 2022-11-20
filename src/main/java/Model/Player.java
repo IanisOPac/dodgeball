@@ -1,7 +1,7 @@
 package Model;
 import Util.Constant;
-
-import java.awt.*;
+import javafx.geometry.BoundingBox;
+import javafx.geometry.Point2D;
 import java.util.Random;
 
 public class Player {
@@ -11,14 +11,11 @@ public class Player {
     private boolean holding = false;
 
     public Player(int _x, int _y, String _side) {
-        // Tous les joueurs commencent au centre du canvas,
-        x = _x - 32;
+        x = _x;
         y = _y;
-
         base_angle = 0;
 
-        // On charge la representation du joueur
-        if(_side=="top") {
+        if(_side.equals("top")) {
             side = -side;
             base_angle = 180;
         }
@@ -26,7 +23,7 @@ public class Player {
 
         // Tous les joueurs ont une vitesse aleatoire entre 0.0 et 1.0
         Random randomGenerator = new Random();
-        speed = 3 + randomGenerator.nextFloat() / 2;
+        speed = Constant.PLAYER_SPEED + randomGenerator.nextFloat() / 2;
     }
 
 
@@ -49,10 +46,6 @@ public class Player {
         if (angle > base_angle - 45) angle -=1;
     }
 
-    void shoot() {
-//        p = new Projectile(graphicsContext, x, y, angle + 90 * side);
-    }
-
     /**
      *  Deplacement en mode boost
      */
@@ -60,16 +53,12 @@ public class Player {
         x += speed*2;
     }
 
-    public double getX() {
-        return x;
+    public Point2D getPosition() {
+        return new Point2D(x, y);
     }
 
-    public double getY() {
-        return y;
-    }
-
-    public Point getPosition() {
-        return new Point((int) x, (int) y);
+    public BoundingBox getBoundingBox() {
+        return new BoundingBox(x, y, Constant.PLAYER_WIDTH, Constant.PLAYER_HEIGHT);
     }
 
     public boolean isHolding() {
@@ -83,6 +72,7 @@ public class Player {
     public double getAngle() {
         return angle;
     }
+
     public double getShootAngle() {
         return angle - 90;
     }

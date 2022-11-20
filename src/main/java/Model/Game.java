@@ -8,9 +8,9 @@ import javafx.scene.canvas.GraphicsContext;
 public class Game {
     PlayerController[] team1 = new PlayerController[Constant.TEAM_SIZE];
 	PlayerController[] team2 = new PlayerController[Constant.TEAM_SIZE];
+
 	/** Couleurs possibles */
 	String[] colorMap = new String[] {"Blue", "Red"};
-	/** Tableau traçant les evenements */
     final int width;
     final int height;
 	private int activePlayers = Constant.TEAM_SIZE * 2;

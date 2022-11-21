@@ -122,7 +122,7 @@ public class GameController extends Canvas {
 		for (PlayerController p : getActivePlayers()) {
 			BoundingBox playerBB = p.getBoundingBox();
 			if (projBB.intersects(playerBB)) {
-				if (projectile.idling()) projectile.grabbedBy(p);
+				if (projectile.idling()) p.grab(projectile);
 				else if (projectile.getSide() != p.getSide()) {
 					p.die();
 					gameModel.updateDead();

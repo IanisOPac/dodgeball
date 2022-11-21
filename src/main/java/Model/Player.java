@@ -4,9 +4,9 @@ import javafx.geometry.BoundingBox;
 import javafx.geometry.Point2D;
 import java.util.Random;
 
-public class Player {
-    private double x, y, speed, base_angle, angle;
-    private int side = -1;
+public abstract class Player {
+    protected double x, y, speed, base_angle, angle;
+    protected int side = -1;
     private boolean alive = true;
     private boolean holding = false;
 
@@ -25,7 +25,6 @@ public class Player {
         Random randomGenerator = new Random();
         speed = Constant.PLAYER_SPEED + randomGenerator.nextFloat() / 2;
     }
-
 
     public void moveLeft() {
         if (x > 0) x -= speed;

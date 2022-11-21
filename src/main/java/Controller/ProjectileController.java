@@ -44,8 +44,7 @@ public class ProjectileController {
         return model.getSide();
     }
 
-    public void grabbedBy(PlayerController p) {
-        p.setHolding(true);
-        model.setSide(p.getSide());
+    public void setSide(int side) {
+        model.setSide(side);
     }
 }

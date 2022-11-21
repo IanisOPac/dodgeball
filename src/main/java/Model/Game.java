@@ -1,6 +1,8 @@
 package Model;
 import java.util.Arrays;
 
+import Controller.AIPlayerController;
+import Controller.HumanPlayerController;
 import Controller.PlayerController;
 import Util.Constant;
 import javafx.scene.canvas.GraphicsContext;
@@ -51,12 +53,12 @@ public class Game {
 	}
 
 	private void generateTeams(GraphicsContext gc) {
-		team1[0] = new PlayerController(gc, width/(Constant.TEAM_SIZE +1), "bottom", colorMap[0]);
-		team2[0] = new PlayerController(gc, width/(Constant.TEAM_SIZE +1), "top", colorMap[1]);
+		team1[0] = new HumanPlayerController(gc, width/(Constant.TEAM_SIZE +1), Constant.WINDOW_HEIGHT - Constant.PLAYER_HEIGHT, "bottom", colorMap[0]);
+		team2[0] = new HumanPlayerController(gc, width/(Constant.TEAM_SIZE +1), 0, "top", colorMap[1]);
 
 		for(int i = 1; i < Constant.TEAM_SIZE; i++) {
-			team1[i] = new PlayerController(gc, (i+1) * width/(Constant.TEAM_SIZE +1), "bottom", colorMap[0]);
-			team2[i] = new PlayerController(gc, (i+1)  * width/(Constant.TEAM_SIZE +1), "top", colorMap[1]);
+			team1[i] = new AIPlayerController(gc, (i+1) * width/(Constant.TEAM_SIZE +1), Constant.WINDOW_HEIGHT - Constant.PLAYER_HEIGHT, "bottom", colorMap[0]);
+			team2[i] = new AIPlayerController(gc, (i+1)  * width/(Constant.TEAM_SIZE +1), 0, "top", colorMap[1]);
 		}
 	}
 

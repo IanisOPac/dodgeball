@@ -8,16 +8,14 @@ import javafx.scene.canvas.GraphicsContext;
 
 public class AIPlayerController extends PlayerController {
     AIPlayer model;
-    ProjectileController projectile;
     public AIPlayerController(GraphicsContext gc, int x, int y, String side, String color) {
         super(gc, x, y, side, color, true);
         model = new AIPlayer(x, y, side);
     }
 
     public void grab(ProjectileController p) {
-        setHolding(true);
-        p.setSide(model.getSide());
-        projectile = p;
+        super.grab(p);
+        model.stay(true);
     }
 
     public void moveLeft() {
@@ -44,18 +42,16 @@ public class AIPlayerController extends PlayerController {
         return model.getBoundingBox();
     }
 
-    public boolean isHolding() {
-        return model.isHolding();
-    }
-
-    public void setHolding(boolean h) {
-        model.setHolding(h);
-    }
-
     public void display() {
         model.moveInDirection();
+        if (proj != null) proj.setPosition(getPosition());
         view.display(model.getPosition(), model.getAngle());
     }
+
+    public double getShootAngle() {
+        return model.getShootAngle();
+    }
+
     public int getSide() {
         return model.getSide();
     }
@@ -69,7 +65,7 @@ public class AIPlayerController extends PlayerController {
         view.die();
     }
 
-    public void shoot(ProjectileController proj) {
+    public void shoot() {
 
     }
 }

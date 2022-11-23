@@ -38,15 +38,6 @@ public class HumanPlayerController extends PlayerController {
         return model.getBoundingBox();
     }
 
-    public boolean isHolding() {
-        return model.isHolding();
-    }
-
-    public void setHolding(boolean h) {
-        model.setHolding(h);
-    }
-
-
     public int getSide() {
         return model.getSide();
     }
@@ -56,28 +47,17 @@ public class HumanPlayerController extends PlayerController {
     }
 
     public void display() {
+        if (proj != null) proj.setPosition(getPosition());
         view.display(model.getPosition(), model.getAngle());
     }
 
-    public void shoot(ProjectileController proj) {
-        setHolding(false);
-        proj.move(model.getShootAngle());
-        view.shoot();
-    }
-
-    public void display(ProjectileController proj) {
-        display();
-        proj.setPosition(getPosition());
+    public double getShootAngle() {
+        return model.getShootAngle();
     }
 
     public void die() {
         model.die();
         view.die();
-    }
-
-    public void grab(ProjectileController proj) {
-        setHolding(true);
-        proj.setSide(model.getSide());
     }
 
   

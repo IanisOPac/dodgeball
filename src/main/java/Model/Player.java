@@ -8,7 +8,6 @@ public abstract class Player {
     protected double x, y, speed, base_angle, angle;
     protected int side = -1;
     private boolean alive = true;
-    private boolean holding = false;
 
     public Player(int _x, int _y, String _side) {
         x = _x;
@@ -58,14 +57,6 @@ public abstract class Player {
 
     public BoundingBox getBoundingBox() {
         return new BoundingBox(x, y, Constant.PLAYER_WIDTH, Constant.PLAYER_HEIGHT);
-    }
-
-    public boolean isHolding() {
-        return holding;
-    }
-
-    public void setHolding(boolean h) {
-        holding = h;
     }
 
     public double getAngle() {

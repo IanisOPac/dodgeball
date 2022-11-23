@@ -12,6 +12,7 @@ import javafx.scene.canvas.GraphicsContext;
 
 public abstract class PlayerController {
     PlayerView view;
+    ProjectileController proj = null;
 
     public PlayerController(GraphicsContext gc, int x, int y, String side, String color, boolean ai) {
         view = new PlayerView(gc, x, y, side, color, ai);
@@ -23,21 +24,25 @@ public abstract class PlayerController {
     public abstract void turnRight();
     public abstract Point2D getPosition();
     public abstract BoundingBox getBoundingBox();
-    public abstract boolean isHolding();
-    public abstract void setHolding(boolean h);
     public abstract int getSide();
     public abstract boolean alive();
     public abstract void die();
-    public abstract void shoot(ProjectileController proj);
-    public abstract void grab(ProjectileController proj);
     public abstract void display();
+    protected abstract double getShootAngle();
 
     public Sprite getSprite() {
         return view.getSprite();
     }
 
-    public void display(ProjectileController proj) {
-        display();
-        proj.setPosition(getPosition());
+    public void grab(ProjectileController proj) {
+        this.proj = proj;
+        proj.setSide(getSide());
+    }
+
+    public void shoot() {
+        if (proj == null) return;
+        proj.move(getShootAngle());
+        view.shoot();
+        proj = null;
     }
 }

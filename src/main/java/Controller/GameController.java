@@ -88,8 +88,7 @@ public class GameController extends Canvas {
 					gameModel.getTeam1()[0].turnRight();
 				}
 				if (input.contains("L")) {
-					PlayerController p = gameModel.getTeam1()[0];
-					if (p.isHolding()) p.shoot(projectile);
+					gameModel.getTeam1()[0].shoot();
 				}
 				if (input.contains("Q")) {
 					gameModel.getTeam2()[0].moveLeft();
@@ -104,12 +103,10 @@ public class GameController extends Canvas {
 					gameModel.getTeam2()[0].turnRight();
 				}
 				if (input.contains("SPACE")) {
-					PlayerController p = gameModel.getTeam2()[0];
-					if (p.isHolding()) p.shoot(projectile);
+					gameModel.getTeam2()[0].shoot();
 				}
 				for (PlayerController p : getActivePlayers()) {
-					if (p.isHolding()) p.display(projectile);
-					else p.display();
+					p.display();
 				}
 				projectile.display();
 				checkCollision();

@@ -22,7 +22,7 @@ public class AIPlayer extends Player {
     }
 
     private void updateDestination() {
-        xDirection = new Random().nextDouble() * (Constant.WINDOW_WIDTH - Constant.PLAYER_WIDTH);
+        xDirection = new Random().nextDouble() * (Constant.FIELD_WIDTH - Constant.PLAYER_WIDTH);
     }
 
     public void stay(boolean s) {

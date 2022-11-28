@@ -23,19 +23,20 @@ public class GameController extends Canvas {
     ArrayList<String> input = new ArrayList<>();
 
 	AnimationTimer t;
+	boolean running = false;
 
     public GameController() {
-		super(Constant.WINDOW_WIDTH, Constant.WINDOW_HEIGHT);
+		super(Constant.FIELD_WIDTH, Constant.FIELD_HEIGHT);
 		gc = this.getGraphicsContext2D();
 		this.setFocusTraversable(true);
-		gameModel = new Game(gc, Constant.WINDOW_WIDTH, Constant.WINDOW_HEIGHT);
+		gameModel = new Game(gc, Constant.FIELD_WIDTH, Constant.FIELD_HEIGHT, 3);
 
 		Random rand = new Random();
 		int startingTeam = rand.nextInt(2) == 0 ? -1 : 1;
 		double angle = rand.nextDouble(-45, 45);
 		projectile = new ProjectileController(gc,
-				Constant.WINDOW_WIDTH / 2 - Constant.BALL_SIZE / 2,
-				Constant.WINDOW_HEIGHT / 2 - Constant.BALL_SIZE / 2,
+				Constant.FIELD_WIDTH / 2 - Constant.BALL_SIZE / 2,
+				Constant.FIELD_HEIGHT / 2 - Constant.BALL_SIZE / 2,
 				angle + 90 * startingTeam);
 
 		/**
@@ -68,12 +69,8 @@ public class GameController extends Canvas {
 		 * soit environ 60 fois par seconde.
 		 *
 		 */
-		new AnimationTimer() {
+		t = new AnimationTimer() {
 			public void handle(long currentNanoTime) {
-				// on nettoie le terrain de jeu
-				gc.setFill(Color.LIGHTGRAY);
-				gc.fillRect(0, 0, Constant.WINDOW_WIDTH, Constant.WINDOW_HEIGHT);
-
 				if (input.contains("K")) {
 					gameModel.getTeam1()[0].moveLeft();
 				}
@@ -104,14 +101,22 @@ public class GameController extends Canvas {
 				if (input.contains("SPACE")) {
 					gameModel.getTeam2()[0].shoot();
 				}
-				for (PlayerController p : getActivePlayers()) {
-					p.display();
-				}
-				projectile.display();
+				display();
 				if (projectile.idling()) notifyAIs();
 				checkCollision();
 			}
-		}.start();
+		};
+
+		display();
+	}
+
+	private void display() {
+		gc.setFill(Color.LIGHTGRAY);
+		gc.fillRect(0, 0, Constant.FIELD_WIDTH, Constant.FIELD_HEIGHT);
+		for (PlayerController p : getActivePlayers()) {
+			p.display();
+		}
+		projectile.display();
 	}
 
 	private void checkCollision() {
@@ -162,4 +167,15 @@ public class GameController extends Canvas {
         return gameModel.getActivePlayers();
 	}
 
+	public void pause() {
+		if (running) t.stop();
+		else t.start();
+		running = !running;
+	}
+	public void newGame(int nb_players) {
+		gameModel = new Game(gc, Constant.FIELD_WIDTH, Constant.FIELD_HEIGHT, nb_players);
+		display();
+		t.stop();
+		running = false;
+	}
 }

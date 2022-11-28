@@ -1,9 +1,16 @@
 package Model;
 import Controller.GameController;
 import Controller.PlayerController;
+import Util.Constant;
 import javafx.application.Application;
-import javafx.scene.Group;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 /**
@@ -24,19 +31,83 @@ public class App extends Application
 		// Nom de la fenetre
         stage.setTitle("Dodgeball");
 
-        Group root = new Group();
-        Scene scene = new Scene(root);
+        BorderPane root = new BorderPane();
+		Scene scene = new Scene(root);
+
+		root.setPrefHeight(Constant.WINDOW_HEIGHT);
+		root.setPrefWidth(Constant.WINDOW_WIDTH);
+
+		Button pauseButton = new Button("START / PAUSE");
+		pauseButton.setPrefHeight(Constant.WINDOW_HEIGHT * 0.3);
+		pauseButton.setPrefWidth(Constant.WINDOW_WIDTH - Constant.FIELD_WIDTH);
+
+		Button plusButton = new Button("+");
+		plusButton.setPrefHeight(Constant.WINDOW_HEIGHT * 0.1);
+		plusButton.setPrefWidth(Constant.WINDOW_WIDTH - Constant.FIELD_WIDTH);
+		plusButton.setFont(Font.font("arial", FontWeight.BOLD, 32));
+
+		Button minusButton = new Button("-");
+		minusButton.setPrefHeight(Constant.WINDOW_HEIGHT * 0.1);
+		minusButton.setPrefWidth(Constant.WINDOW_WIDTH - Constant.FIELD_WIDTH);
+		minusButton.setFont(Font.font("arial", FontWeight.BOLD, 32));
+
+		Label nbPlayers = new Label(Integer.toString(3));
+		nbPlayers.setPrefHeight(Constant.WINDOW_HEIGHT * 0.2);
+		nbPlayers.setPrefWidth(Constant.WINDOW_WIDTH - Constant.FIELD_WIDTH);
+		nbPlayers.setAlignment(Pos.CENTER);
+		nbPlayers.setFont(Font.font("arial", 48));
+
+
+		VBox vbox = new VBox();
+		vbox.getChildren().addAll(pauseButton, plusButton, nbPlayers, minusButton);
+
+		vbox.setAlignment(Pos.CENTER_LEFT);
+
+
+		root.setRight(vbox);
 
         // On cree le terrain de jeu et on l'ajoute a la racine de la scene
         GameController gameC = new GameController();
+
+		pauseButton.setOnAction(event -> {
+			gameC.pause();
+			gameC.requestFocus();
+		});
+
+		plusButton.setOnAction(event -> {
+			int nb = Integer.parseInt(nbPlayers.getText()) + 1;
+			nbPlayers.setText(Integer.toString(nb));
+			gameC.newGame(nb);
+			root.getChildren().clear();
+			root.setRight(vbox);
+			root.getChildren().add(gameC);
+			for (PlayerController p : gameC.getActivePlayers()) {
+				root.getChildren().add(p.getSprite());
+			}
+		});
+
+		minusButton.setOnAction(event -> {
+			int nb = Integer.parseInt(nbPlayers.getText()) - 1;
+			if (nb > 0) {
+				nbPlayers.setText(Integer.toString(nb));
+				gameC.newGame(nb);
+			}
+			root.getChildren().clear();
+			root.setRight(vbox);
+			root.getChildren().add(gameC);
+			for (PlayerController p : gameC.getActivePlayers()) {
+				root.getChildren().add(p.getSprite());
+			}
+		});
+
         root.getChildren().add(gameC);
 		for (PlayerController p : gameC.getActivePlayers()) {
 			root.getChildren().add(p.getSprite());
 		}
-
         // On ajoute la scene a la fenetre et on affiche
         stage.setScene(scene);
         stage.show();
+
 	}
 	
     public static void main(String[] args) 

@@ -30,7 +30,7 @@ public abstract class Player {
     }
 
     public void moveRight() {
-        if (x + Constant.PLAYER_WIDTH < Constant.WINDOW_WIDTH) x += speed;
+        if (x + Constant.PLAYER_WIDTH < Constant.FIELD_WIDTH) x += speed;
     }
 
     public void turnLeft() {

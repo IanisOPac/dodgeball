@@ -9,8 +9,8 @@ import Util.Constant;
 import javafx.scene.canvas.GraphicsContext;
 
 public class Game {
-    PlayerController[] team1 = new PlayerController[Constant.TEAM_SIZE];
-	PlayerController[] team2 = new PlayerController[Constant.TEAM_SIZE];
+    PlayerController[] team1;
+	PlayerController[] team2;
 
 	/** Couleurs possibles */
 	String[] colorMap = new String[] {"Blue", "Red"};
@@ -23,10 +23,12 @@ public class Game {
      * @param w largeur du canvas
      * @param h hauteur du canvas
      */
-	public Game(GraphicsContext gc, int w, int h) {
+	public Game(GraphicsContext gc, int w, int h, int nb_player) {
 		width = w;
 		height = h;
-		generateTeams(gc);
+		team1 = new PlayerController[nb_player];
+		team2 = new PlayerController[nb_player];
+		generateTeams(gc, nb_player);
     }
 
 	public PlayerController[] getActivePlayers() {
@@ -59,13 +61,13 @@ public class Game {
 		return team2;
 	}
 
-	private void generateTeams(GraphicsContext gc) {
-		team1[0] = new HumanPlayerController(gc, width/(Constant.TEAM_SIZE +1), Constant.WINDOW_HEIGHT - Constant.PLAYER_HEIGHT, "bottom", colorMap[0]);
-		team2[0] = new HumanPlayerController(gc, width/(Constant.TEAM_SIZE +1), 0, "top", colorMap[1]);
+	private void generateTeams(GraphicsContext gc, int nb_player) {
+		team1[0] = new HumanPlayerController(gc, width/(nb_player +1), Constant.FIELD_HEIGHT - Constant.PLAYER_HEIGHT, "bottom", colorMap[0]);
+		team2[0] = new HumanPlayerController(gc, width/(nb_player +1), 0, "top", colorMap[1]);
 
-		for(int i = 1; i < Constant.TEAM_SIZE; i++) {
-			team1[i] = new AIPlayerController(gc, (i+1) * width/(Constant.TEAM_SIZE +1), Constant.WINDOW_HEIGHT - Constant.PLAYER_HEIGHT, "bottom", colorMap[0]);
-			team2[i] = new AIPlayerController(gc, (i+1)  * width/(Constant.TEAM_SIZE +1), 0, "top", colorMap[1]);
+		for(int i = 1; i < nb_player; i++) {
+			team1[i] = new AIPlayerController(gc, (i+1) * width/(nb_player +1), Constant.FIELD_HEIGHT - Constant.PLAYER_HEIGHT, "bottom", colorMap[0]);
+			team2[i] = new AIPlayerController(gc, (i+1)  * width/(nb_player +1), 0, "top", colorMap[1]);
 		}
 	}
 }

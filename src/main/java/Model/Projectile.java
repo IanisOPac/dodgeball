@@ -66,11 +66,11 @@ public class Projectile {
     }
 
     private boolean collidingWall() {
-        return this.x + Constant.BALL_SIZE > Constant.WINDOW_WIDTH || this.x < 0;
+        return this.x + Constant.BALL_SIZE > Constant.FIELD_WIDTH || this.x < 0;
     }
 
     private boolean collidingSide() {
-        return this.y + Constant.BALL_SIZE > Constant.WINDOW_HEIGHT || this.y < 0;
+        return this.y + Constant.BALL_SIZE > Constant.FIELD_HEIGHT || this.y < 0;
     }
 
     public int getSide() {

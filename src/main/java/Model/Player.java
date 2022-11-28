@@ -3,7 +3,9 @@ import Util.Constant;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Point2D;
 import java.util.Random;
-
+/**
+ * Classe qui bouge le joueur dans le jeu
+ */
 public abstract class Player {
     protected double x, y, speed, base_angle, angle;
     protected int side = -1;

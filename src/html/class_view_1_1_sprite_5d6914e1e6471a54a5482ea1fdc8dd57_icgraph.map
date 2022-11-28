@@ -1,0 +1,5 @@
+<area shape="rect" id="node2" href="$class_view_1_1_sprite.html#4a40d9ceea8472a1df3d119e4a9856f1" title="View.Sprite.playShoot" coords="266,5,414,32">
+<area shape="rect" id="node6" href="$class_view_1_1_player_view.html#15ae00d26b6d567557811c666752b2ad" title="View.PlayerView.spriteAnimate" coords="240,56,440,83">
+<area shape="rect" id="node3" href="$class_view_1_1_player_view.html#cc035d7f5a2c2def5d7998da971d03cc" title="View.PlayerView.shoot" coords="488,5,640,32">
+<area shape="rect" id="node4" href="$class_controller_1_1_player_controller.html#8e1f385e13fe701265e643b21e5be6f6" title="Controller.PlayerController.shoot" coords="688,5,896,32">
+<area shape="rect" id="node5" href="$class_controller_1_1_game_controller.html#4e7c5aee7d70f3262e5e79c8c449b471" title="Controller.GameController.GameController" coords="944,5,1208,32">

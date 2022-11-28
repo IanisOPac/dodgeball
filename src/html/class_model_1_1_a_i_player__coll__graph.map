@@ -1,0 +1,1 @@
+<area shape="rect" id="node2" href="$class_model_1_1_player.html" title="{Model.Player\n|# x\l# y\l# speed\l# base_angle\l# angle\l# side\l&#45; alive\l|+ Player()\l+ moveLeft()\l+ moveRight()\l+ turnLeft()\l+ turnRight()\l+ getPosition()\l+ getBoundingBox()\l+ getAngle()\l+ getShootAngle()\l+ getSide()\l+ alive()\l+ die()\l~ boost()\l}" coords="9,5,144,347">

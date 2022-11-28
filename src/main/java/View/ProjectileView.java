@@ -3,7 +3,9 @@ package View;
 import Util.Constant;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-
+/**
+ * Classe pour les effets visuell du projectile
+ */
 public class ProjectileView {
     GraphicsContext gc;
     Image image = new Image("assets/ball.png", Constant.BALL_SIZE, Constant.BALL_SIZE, false, false);

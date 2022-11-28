@@ -5,7 +5,6 @@ import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 /**
  * Classe principale de l'application 
  * s'appuie sur javafx pour le rendu

@@ -4,12 +4,13 @@ import Model.HumanPlayer;
 import Model.Player;
 import Util.Constant;
 import View.Sprite;
-
 import View.PlayerView;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
-
+/**
+ * Classe abstrait pour controller les joueurs
+ */
 public abstract class PlayerController {
     PlayerView view;
     ProjectileController proj = null;

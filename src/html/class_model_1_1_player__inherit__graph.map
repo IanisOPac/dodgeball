@@ -1,0 +1,2 @@
+<area shape="rect" id="node2" href="$class_model_1_1_a_i_player.html" title="{Model.AIPlayer\n|~ xDirection\l~ stay\l|+ AIPlayer()\l+ moveInDirection()\l+ stay()\l&#45; updateDestination()\l}" coords="5,395,148,531">
+<area shape="rect" id="node3" href="$class_model_1_1_human_player.html" title="{Model.HumanPlayer\n||+ HumanPlayer()\l}" coords="172,424,307,501">

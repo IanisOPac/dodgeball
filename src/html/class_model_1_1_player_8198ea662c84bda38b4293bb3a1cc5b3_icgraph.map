@@ -1,0 +1,4 @@
+<area shape="rect" id="node2" href="$class_model_1_1_a_i_player.html#7777b44d75199fb2c9e8aec9806c65ec" title="Model.AIPlayer.moveInDirection" coords="249,5,452,32">
+<area shape="rect" id="node4" href="$class_controller_1_1_human_player_controller.html#4dd797f52cef52cbf525fa62d53bb1d8" title="Controller.HumanPlayerController.moveRight" coords="212,56,489,83">
+<area shape="rect" id="node5" href="$class_controller_1_1_a_i_player_controller.html#f9dc71875a11467b6d344986f4bd7b63" title="Controller.AIPlayerController.moveRight" coords="226,107,475,133">
+<area shape="rect" id="node3" href="$class_controller_1_1_a_i_player_controller.html#37e56b1d7c3820a3eda14c5d5577678e" title="Controller.AIPlayerController.display" coords="537,5,765,32">

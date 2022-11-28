@@ -6,7 +6,9 @@ import Controller.HumanPlayerController;
 import Controller.PlayerController;
 import Util.Constant;
 import javafx.scene.canvas.GraphicsContext;
-
+/**
+ * Classe pour initialiser le jeu
+ */
 public class Game {
     PlayerController[] team1 = new PlayerController[Constant.TEAM_SIZE];
 	PlayerController[] team2 = new PlayerController[Constant.TEAM_SIZE];

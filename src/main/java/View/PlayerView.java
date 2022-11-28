@@ -6,7 +6,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
-
+/**
+ * Classe pour les effets visuell
+ */
 public class PlayerView {
     Image directionArrow;
     Sprite sprite;

@@ -1,5 +1,7 @@
 package Util;
-
+/**
+ * Classe pour les constates
+ */
 public class Constant {
     public static final int WINDOW_WIDTH = 800;
     public static final int WINDOW_HEIGHT = 600;

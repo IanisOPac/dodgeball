@@ -2,7 +2,9 @@ package Model;
 import Util.Constant;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Point2D;
-
+/**
+ * Classe pour gerer le projectile
+ */
 public class Projectile {
     double speed = Constant.PROJECTILE_SPEED;
     double x, y, angle, x_velocity, y_velocity;

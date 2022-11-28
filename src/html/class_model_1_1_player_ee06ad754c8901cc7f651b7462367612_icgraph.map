@@ -1,0 +1,5 @@
+<area shape="rect" id="node2" href="$class_controller_1_1_human_player_controller.html#a6d41caf2b52b35fa8871652716f8658" title="Controller.HumanPlayerController.alive" coords="179,5,421,32">
+<area shape="rect" id="node3" href="$class_controller_1_1_a_i_player_controller.html#ee2b8a28efb8b01205b61010c6962046" title="Controller.AIPlayerController.alive" coords="193,56,407,83">
+<area shape="rect" id="node4" href="$class_model_1_1_player.html#e10cdd2a1e21a58098be47a229489144" title="Model.Player.die" coords="242,107,358,133">
+<area shape="rect" id="node5" href="$class_controller_1_1_human_player_controller.html#be594a5ed21b29f8740576a32a480175" title="Controller.HumanPlayerController.die" coords="469,81,704,108">
+<area shape="rect" id="node6" href="$class_controller_1_1_a_i_player_controller.html#5e62241fa899743fa8dae5cdb681872a" title="Controller.AIPlayerController.die" coords="483,132,690,159">

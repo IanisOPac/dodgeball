@@ -5,7 +5,9 @@ import Model.Player;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
-
+/**
+ * Classe qui initialize les joueurs AI
+ */
 public class AIPlayerController extends PlayerController {
     AIPlayer model;
     public AIPlayerController(GraphicsContext gc, int x, int y, String side, String color) {

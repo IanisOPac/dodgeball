@@ -2,7 +2,9 @@ package Model;
 
 import java.util.Random;
 import Util.Constant;
-
+/**
+ * Classe pour que les AI puisse jouer
+ */
 public class AIPlayer extends Player {
     double xDirection;
     boolean stay = false;

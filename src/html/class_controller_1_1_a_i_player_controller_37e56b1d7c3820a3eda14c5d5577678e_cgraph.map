@@ -1,0 +1,10 @@
+<area shape="rect" id="node2" href="$class_view_1_1_player_view.html#7c52235d2744a1a991904b64b52a3e5d" title="View.PlayerView.display" coords="329,5,489,32">
+<area shape="rect" id="node3" href="$class_model_1_1_player.html#5d3829481a8e28ded33bf6b51e64d3da" title="Model.Player.getAngle" coords="335,56,484,83">
+<area shape="rect" id="node4" href="$class_model_1_1_player.html#9fd007a263b250dfd57b7b7a92273e55" title="Model.Player.getPosition" coords="585,107,747,133">
+<area shape="rect" id="node5" href="$class_controller_1_1_a_i_player_controller.html#53d8a4998f24690e0ba546c46bae8a93" title="Controller.AIPlayerController.getPosition" coords="284,157,535,184">
+<area shape="rect" id="node6" href="$class_model_1_1_a_i_player.html#7777b44d75199fb2c9e8aec9806c65ec" title="Model.AIPlayer.moveInDirection" coords="308,208,511,235">
+<area shape="rect" id="node9" href="$class_controller_1_1_projectile_controller.html#c0b6149ebda3733d1dbc02e4a31046dd" title="Controller.ProjectileController.setPosition" coords="281,259,537,285">
+<area shape="rect" id="node7" href="$class_model_1_1_player.html#51a465889352d2eba15eeb124dea3a74" title="Model.Player.moveLeft" coords="591,157,741,184">
+<area shape="rect" id="node8" href="$class_model_1_1_player.html#8198ea662c84bda38b4293bb3a1cc5b3" title="Model.Player.moveRight" coords="587,208,745,235">
+<area shape="rect" id="node10" href="$class_model_1_1_projectile.html#1a4be43e256c1f217ceb87172ffab2f6" title="Model.Projectile.setX" coords="595,259,737,285">
+<area shape="rect" id="node11" href="$class_model_1_1_projectile.html#e6abe51fca2d6adc680e64614990e636" title="Model.Projectile.setY" coords="595,309,737,336">

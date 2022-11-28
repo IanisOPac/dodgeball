@@ -4,7 +4,9 @@ import Model.HumanPlayer;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
-
+/**
+ * Classe controller pour la joueuse humaine
+ */
 public class HumanPlayerController extends PlayerController {
     HumanPlayer model;
     

@@ -5,7 +5,9 @@ import View.ProjectileView;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
-
+/**
+ * Classe controller du projectile
+ */
 public class ProjectileController {
     Projectile model;
     ProjectileView view;

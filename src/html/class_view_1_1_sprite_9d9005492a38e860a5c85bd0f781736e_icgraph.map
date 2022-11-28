@@ -1,0 +1,4 @@
+<area shape="rect" id="node2" href="$class_view_1_1_sprite.html#d97abf435d7dca4d82564e052e39d732" title="View.Sprite.playDie" coords="169,31,303,57">
+<area shape="rect" id="node3" href="$class_view_1_1_player_view.html#f1a6ab90f612894884e0e5ce69801ca1" title="View.PlayerView.die" coords="351,31,489,57">
+<area shape="rect" id="node4" href="$class_controller_1_1_human_player_controller.html#be594a5ed21b29f8740576a32a480175" title="Controller.HumanPlayerController.die" coords="537,5,772,32">
+<area shape="rect" id="node5" href="$class_controller_1_1_a_i_player_controller.html#5e62241fa899743fa8dae5cdb681872a" title="Controller.AIPlayerController.die" coords="551,56,758,83">

@@ -31,9 +31,7 @@ public class App extends Application
 		// Nom de la fenetre
         stage.setTitle("Dodgeball");
 
-        BorderPane root = new BorderPane();
-		Scene scene = new Scene(root);
-
+		BorderPane root = new BorderPane();
 		root.setPrefHeight(Constant.WINDOW_HEIGHT);
 		root.setPrefWidth(Constant.WINDOW_WIDTH);
 
@@ -51,7 +49,7 @@ public class App extends Application
 		minusButton.setPrefWidth(Constant.WINDOW_WIDTH - Constant.FIELD_WIDTH);
 		minusButton.setFont(Font.font("arial", FontWeight.BOLD, 32));
 
-		Label nbPlayers = new Label(Integer.toString(3));
+		Label nbPlayers = new Label();
 		nbPlayers.setPrefHeight(Constant.WINDOW_HEIGHT * 0.2);
 		nbPlayers.setPrefWidth(Constant.WINDOW_WIDTH - Constant.FIELD_WIDTH);
 		nbPlayers.setAlignment(Pos.CENTER);
@@ -60,11 +58,7 @@ public class App extends Application
 
 		VBox vbox = new VBox();
 		vbox.getChildren().addAll(pauseButton, plusButton, nbPlayers, minusButton);
-
 		vbox.setAlignment(Pos.CENTER_LEFT);
-
-
-		root.setRight(vbox);
 
         // On cree le terrain de jeu et on l'ajoute a la racine de la scene
         GameController gameC = new GameController();
@@ -76,38 +70,33 @@ public class App extends Application
 
 		plusButton.setOnAction(event -> {
 			int nb = Integer.parseInt(nbPlayers.getText()) + 1;
-			nbPlayers.setText(Integer.toString(nb));
-			gameC.newGame(nb);
-			root.getChildren().clear();
-			root.setRight(vbox);
-			root.getChildren().add(gameC);
-			for (PlayerController p : gameC.getActivePlayers()) {
-				root.getChildren().add(p.getSprite());
-			}
+			if (nb <= 10) addPlayers(root, vbox, gameC, nbPlayers, nb);
 		});
 
 		minusButton.setOnAction(event -> {
 			int nb = Integer.parseInt(nbPlayers.getText()) - 1;
-			if (nb > 0) {
-				nbPlayers.setText(Integer.toString(nb));
-				gameC.newGame(nb);
-			}
-			root.getChildren().clear();
-			root.setRight(vbox);
-			root.getChildren().add(gameC);
-			for (PlayerController p : gameC.getActivePlayers()) {
-				root.getChildren().add(p.getSprite());
-			}
+			if (nb > 0) addPlayers(root, vbox, gameC, nbPlayers, nb);
 		});
 
-        root.getChildren().add(gameC);
-		for (PlayerController p : gameC.getActivePlayers()) {
-			root.getChildren().add(p.getSprite());
-		}
+		addPlayers(root, vbox, gameC, nbPlayers, 3);
         // On ajoute la scene a la fenetre et on affiche
+
+		Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
 
+	}
+
+	private void addPlayers(BorderPane root, VBox vbox, GameController gameC, Label nbPlayers, int nb) {
+		nbPlayers.setText(Integer.toString(nb));
+		gameC.newGame(nb);
+		root.getChildren().clear();
+		root.setRight(vbox);
+		root.getChildren().add(gameC);
+		for (PlayerController p : gameC.getActivePlayers()) {
+			root.getChildren().add(p.getSprite());
+		}
+		gameC.requestFocus();
 	}
 	
     public static void main(String[] args) 

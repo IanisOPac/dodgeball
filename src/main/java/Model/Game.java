@@ -1,10 +1,12 @@
 package Model;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 import Controller.AIPlayerController;
 import Controller.HumanPlayerController;
 import Controller.PlayerController;
+import Controller.ProjectileController;
 import Util.Constant;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -16,6 +18,8 @@ public class Game {
 	String[] colorMap = new String[] {"Blue", "Red"};
     final int width;
     final int height;
+
+	ProjectileController projectile;
     
     /**
      * Canvas dans lequel on va dessiner le jeu.
@@ -29,6 +33,14 @@ public class Game {
 		team1 = new PlayerController[nb_player];
 		team2 = new PlayerController[nb_player];
 		generateTeams(gc, nb_player);
+
+		Random rand = new Random();
+		int startingTeam = rand.nextInt(2) == 0 ? -1 : 1;
+		double angle = rand.nextDouble(-45, 45);
+		projectile = new ProjectileController(gc,
+				Constant.FIELD_WIDTH / 2 - Constant.BALL_SIZE / 2,
+				Constant.FIELD_HEIGHT / 2 - Constant.BALL_SIZE / 2,
+				angle + 90 * startingTeam);
     }
 
 	public PlayerController[] getActivePlayers() {
@@ -69,5 +81,9 @@ public class Game {
 			team1[i] = new AIPlayerController(gc, (i+1) * width/(nb_player +1), Constant.FIELD_HEIGHT - Constant.PLAYER_HEIGHT, "bottom", colorMap[0]);
 			team2[i] = new AIPlayerController(gc, (i+1)  * width/(nb_player +1), 0, "top", colorMap[1]);
 		}
+	}
+
+	public ProjectileController getProjectile() {
+		return projectile;
 	}
 }

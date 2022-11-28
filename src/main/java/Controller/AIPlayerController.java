@@ -1,10 +1,13 @@
 package Controller;
 
 import Model.AIPlayer;
-import Model.Player;
+import Util.Constant;
+import com.sun.javafx.scene.paint.GradientUtils;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
+
+import java.util.Random;
 
 public class AIPlayerController extends PlayerController {
     AIPlayer model;
@@ -44,6 +47,7 @@ public class AIPlayerController extends PlayerController {
 
     public void display() {
         model.moveInDirection();
+        if (model.moveAngle()) shoot();
         if (proj != null) proj.setPosition(getPosition());
         view.display(model.getPosition(), model.getAngle());
     }
@@ -65,7 +69,27 @@ public class AIPlayerController extends PlayerController {
         view.die();
     }
 
-    public void shoot() {
+    public void initiateShot(PlayerController[] enemies) {
+        int i = new Random().nextInt(enemies.length);
+        PlayerController target = enemies[i];
+        measureShootAngle(target.getPosition());
+    }
 
+    private void measureShootAngle(Point2D pos) {
+        double opp = pos.getX() - getPosition().getX();
+        double adj = pos.getY() - getPosition().getY();
+        double tan = opp / adj;
+        double angle = Math.atan(tan);
+        model.updateAngle(angle * 180 / Math.PI);
+    }
+
+    public void shoot() {
+        super.shoot();
+        model.stay(false);
+        model.resetAngle();
+    }
+
+    public void setDestination(double x) {
+        model.setxDirection(x);
     }
 }

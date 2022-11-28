@@ -1,4 +1,5 @@
 package Model;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import Controller.AIPlayerController;
@@ -15,7 +16,6 @@ public class Game {
 	String[] colorMap = new String[] {"Blue", "Red"};
     final int width;
     final int height;
-	private int activePlayers = Constant.TEAM_SIZE * 2;
     
     /**
      * Canvas dans lequel on va dessiner le jeu.
@@ -30,12 +30,19 @@ public class Game {
     }
 
 	public PlayerController[] getActivePlayers() {
-		int i = 0;
-		PlayerController[] result = new PlayerController[activePlayers];
+		ArrayList<PlayerController> result = new ArrayList<>();
 		for (PlayerController p : getPlayers()) {
-			if (p.alive()) result[i++] = p;
+			if (p.alive()) result.add(p);
 		}
-		return result;
+		return result.toArray(new PlayerController[0]);
+	}
+
+	public PlayerController[] getActivePlayers(int side) {
+		ArrayList<PlayerController> result = new ArrayList<>();
+		for (PlayerController p : getActivePlayers()) {
+			if (p.getSide() == side) result.add(p);
+		}
+		return result.toArray(new PlayerController[0]);
 	}
 
 	private PlayerController[] getPlayers() {
@@ -60,9 +67,5 @@ public class Game {
 			team1[i] = new AIPlayerController(gc, (i+1) * width/(Constant.TEAM_SIZE +1), Constant.WINDOW_HEIGHT - Constant.PLAYER_HEIGHT, "bottom", colorMap[0]);
 			team2[i] = new AIPlayerController(gc, (i+1)  * width/(Constant.TEAM_SIZE +1), 0, "top", colorMap[1]);
 		}
-	}
-
-	public void updateDead() {
-		activePlayers--;
 	}
 }

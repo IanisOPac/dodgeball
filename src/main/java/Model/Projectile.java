@@ -50,7 +50,7 @@ public class Projectile {
     public void move(double angle) {
         this.angle = angle;
         updateTrajectory();
-        speed = 5;
+        speed = Constant.PROJECTILE_SPEED;
     }
 
     public Point2D getPosition() {

@@ -22,20 +22,21 @@ public class GameController extends Canvas {
     /** Tableau traçant les evenements */
     ArrayList<String> input = new ArrayList<>();
 
+	AnimationTimer t;
+
     public GameController() {
 		super(Constant.WINDOW_WIDTH, Constant.WINDOW_HEIGHT);
 		gc = this.getGraphicsContext2D();
 		this.setFocusTraversable(true);
 		gameModel = new Game(gc, Constant.WINDOW_WIDTH, Constant.WINDOW_HEIGHT);
+
 		Random rand = new Random();
-		int startingTeam = rand.nextInt(2);
-		if (startingTeam == 0) {
-			startingTeam = -1;
-		}
+		int startingTeam = rand.nextInt(2) == 0 ? -1 : 1;
 		double angle = rand.nextDouble(-45, 45);
-		System.out.println(startingTeam);
-		System.out.println(angle);
-		projectile = new ProjectileController(gc, Constant.WINDOW_WIDTH / 2 - Constant.BALL_SIZE / 2, Constant.WINDOW_HEIGHT / 2 - Constant.BALL_SIZE / 2, angle + 90 * startingTeam);
+		projectile = new ProjectileController(gc,
+				Constant.WINDOW_WIDTH / 2 - Constant.BALL_SIZE / 2,
+				Constant.WINDOW_HEIGHT / 2 - Constant.BALL_SIZE / 2,
+				angle + 90 * startingTeam);
 
 		/**
 		 * Event Listener du clavier
@@ -60,8 +61,6 @@ public class GameController extends Canvas {
 					String code = e.getCode().toString();
 					input.remove(code);
 				});
-
-
 		/**
 		 *
 		 * Boucle principale du jeu
@@ -109,9 +108,10 @@ public class GameController extends Canvas {
 					p.display();
 				}
 				projectile.display();
+				if (projectile.idling()) notifyAIs();
 				checkCollision();
 			}
-		}.start(); // On lance la boucle de rafraichissement
+		}.start();
 	}
 
 	private void checkCollision() {
@@ -119,10 +119,13 @@ public class GameController extends Canvas {
 		for (PlayerController p : getActivePlayers()) {
 			BoundingBox playerBB = p.getBoundingBox();
 			if (projBB.intersects(playerBB)) {
-				if (projectile.idling()) p.grab(projectile);
+				if (projectile.idling()) {
+					p.grab(projectile);
+					if (p instanceof AIPlayerController) ((AIPlayerController)p).initiateShot(gameModel.getActivePlayers(-p.getSide()));
+				}
 				else if (projectile.getSide() != p.getSide()) {
 					p.die();
-					gameModel.updateDead();
+					if (checkVictory()) System.out.println("AH OUI OUI OUI C'EST FINI !!");
 				}
 			}
 		}
@@ -136,7 +139,23 @@ public class GameController extends Canvas {
 	// }
 
 	private boolean checkVictory() {
-		return false;
+		PlayerController p1, p2;
+		PlayerController[] players = getActivePlayers();
+
+		p1 = players[0];
+		for (int i = 1; i < players.length; i++) {
+			p2 = players[i];
+			if (p1.getSide() != p2.getSide()) return false;
+			p1 = p2;
+		}
+		return true;
+	}
+
+	private void notifyAIs() {
+		int side = projectile.getPosition().getY() < 50 ? 1 : -1;
+		for (PlayerController p : gameModel.getActivePlayers(side)) {
+			if (p instanceof AIPlayerController) ((AIPlayerController)p).setDestination(projectile.getPosition().getX());
+		}
 	}
 
 	public PlayerController[] getActivePlayers() {

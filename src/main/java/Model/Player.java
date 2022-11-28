@@ -34,14 +34,14 @@ public abstract class Player {
     }
 
     public void turnLeft() {
-        if (angle < base_angle + 45) angle += 1;
+        if (angle < base_angle + 60) angle += 1;
     }
 
     /**
      *  Rotation du joueur vers la droite
      */
     public void turnRight() {
-        if (angle > base_angle - 45) angle -=1;
+        if (angle > base_angle - 60) angle -=1;
     }
 
     /**

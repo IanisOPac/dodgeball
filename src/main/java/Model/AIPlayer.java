@@ -6,33 +6,19 @@ import Util.Constant;
 public class AIPlayer extends Player {
     double xDirection;
     boolean stay = false;
+    double nAngle;
     
     public AIPlayer(int _x, int _y, String _side) {
         super(_x, _y, _side);
         updateDestination();
+        nAngle = base_angle;
     }
-
-//     public void predictLauchBall(double xProj, double yProj){
-//
-//     }
-    
-    // public void predictArrivingBall(){
-    //     if(yProj - x){
-
-    //     }
-    // }
 
     public void moveInDirection(){
         if (stay) return;
-        if(xDirection > x - 5 && xDirection < x + 5){
-            updateDestination();
-        }
-        if(xDirection < this.x){
-            moveLeft();
-        }
-        else{
-            moveRight();
-        }
+        if(xDirection > x - 5 && xDirection < x + 5) updateDestination();
+        if(xDirection < x) moveLeft();
+        else moveRight();
     }
 
     private void updateDestination() {
@@ -41,5 +27,24 @@ public class AIPlayer extends Player {
 
     public void stay(boolean s) {
         stay = s;
+    }
+
+    public void updateAngle(double angle) {
+        nAngle = base_angle - angle;
+    }
+
+    public void resetAngle() {
+        nAngle = base_angle;
+    }
+
+    public boolean moveAngle() {
+        if (Math.round(angle) == Math.round(nAngle)) return true;
+        if (angle < nAngle) turnLeft();
+        else turnRight();
+        return false;
+    }
+
+    public void setxDirection(double x) {
+        xDirection = x;
     }
 }

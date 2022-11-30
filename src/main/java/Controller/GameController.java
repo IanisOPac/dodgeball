@@ -71,13 +71,13 @@ public class GameController extends Canvas {
 				if (input.contains("M")) {
 					gameModel.getTeam1()[0].moveRight();
 				}
-				if (input.contains("RIGHT")) {
+				if (input.contains("L")) {
 					gameModel.getTeam1()[0].turnLeft();
 				}
-				if (input.contains("LEFT")) {
+				if (input.contains("O")) {
 					gameModel.getTeam1()[0].turnRight();
 				}
-				if (input.contains("L")) {
+				if (input.contains("ENTER")) {
 					gameModel.getTeam1()[0].shoot();
 				}
 				if (input.contains("Q")) {
@@ -86,10 +86,10 @@ public class GameController extends Canvas {
 				if (input.contains("D")) {
 					gameModel.getTeam2()[0].moveRight();
 				}
-				if (input.contains("B")) {
+				if (input.contains("Z")) {
 					gameModel.getTeam2()[0].turnLeft();
 				}
-				if (input.contains("N")) {
+				if (input.contains("S")) {
 					gameModel.getTeam2()[0].turnRight();
 				}
 				if (input.contains("SPACE")) {

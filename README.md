@@ -27,7 +27,20 @@ Réalisé par :
 La fenêtre de jeu devrait être comme suit :  
 
 ![dodgeball](https://user-images.githubusercontent.com/37707420/204805194-8b3a33cc-c3e5-4bc5-a4ec-e63cc7afc40a.jpg)
-*1. Les joueurs, ceux en noir et blanc sont contrôlés par l'ordinateur*  
-*2. Le ballon*  
-*3. Bouton permettant de commencer et de mettre en pause le jeu*  
-*4. Boutons permettant de créer une nouvelle partie avec plus ou moins de joueurs (max: 10)*  
+1. *Les joueurs, ceux en noir et blanc sont contrôlés par l'ordinateur*  
+2. *Le ballon*  
+3. *Bouton permettant de commencer et de mettre en pause le jeu*  
+4. *Boutons permettant de créer une nouvelle partie avec plus ou moins de joueurs (max: 10)*  
+
+#### Contrôles
+Le **joueur du haut** se déplace avec Q et D et oriente sa visée avec Z et S. Il peut tirer avec la touche ESPACE.  
+Résumé : **ZQSD + ESPACE**  
+
+Le **joueur du bas** se déplace avec K et M et oriente sa visée avec O et L. Il peut tirer avec la touche ENTREE.  
+Résumé : **OKLM + ENTREE**
+
+#### Condition de victoire
+La partie se termine lorsque l'une des deux équipes ne contient plus de joueur en vie. L'affichage du vainqueur se fait dans la console.
+
+#### Lancer une nouvelle partie
+Il suffit de cliquer sur le bouton **"+"** ou **"-"**.

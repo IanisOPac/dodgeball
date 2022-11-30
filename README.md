@@ -2,9 +2,9 @@
 Projet de balle au prisonnier fait en java avec le framework JavaFX. 
 
 Réalisé par :
-- Rose Chapelle
-- Ianis Olivier-Pacaud
-- Florette Witzel
+- Rose Chapelle alias [Rosiflette](https://github.com/Rosiflette)
+- Ianis Olivier-Pacaud alias [IanisOPac](https://github.com/IanisOPac)
+- Florette Witzel alias [FloretteW](https://github.com/FloretteW)
 
 ## Installation
 ### Prérequis
@@ -13,12 +13,12 @@ Réalisé par :
 
 ### Exécution
 #### - Sur Eclipse
-- Ouvrir le projet
+- ouvrir le projet
 - faire un clic-droit sur le fichier `pom.xml`
 - cliquer sur "Run As..." puis sur "Maven build"
 - ajouter dans le champs "Goals" : `javafx:run`
 #### - Sur IntelliJ
-- Ouvrir le projet
+- ouvrir le projet
 - cliquer sur "Edit Configurations..."
 - créer une configuration Maven
 - ajouter dans le champs "Command Line" : `javafx:run`

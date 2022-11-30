@@ -111,6 +111,7 @@ public class GameController extends Canvas {
 			p.display();
 		}
 		gameModel.getProjectile().display();
+		requestFocus();
 	}
 
 	private void checkCollision() {

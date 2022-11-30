@@ -65,7 +65,6 @@ public class App extends Application
 
 		pauseButton.setOnAction(event -> {
 			gameC.pause();
-			gameC.requestFocus();
 		});
 
 		plusButton.setOnAction(event -> {
@@ -96,7 +95,6 @@ public class App extends Application
 		for (PlayerController p : gameC.getActivePlayers()) {
 			root.getChildren().add(p.getSprite());
 		}
-		gameC.requestFocus();
 	}
 	
     public static void main(String[] args) 

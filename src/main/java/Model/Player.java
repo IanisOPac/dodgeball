@@ -22,7 +22,7 @@ public abstract class Player {
 
         // Tous les joueurs ont une vitesse aleatoire entre 0.0 et 1.0
         Random randomGenerator = new Random();
-        speed = Constant.PLAYER_SPEED + randomGenerator.nextFloat() / 2;
+        speed = Constant.PLAYER_SPEED + randomGenerator.nextDouble() / 2;
     }
 
     public void moveLeft() {

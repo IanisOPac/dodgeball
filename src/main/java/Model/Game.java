@@ -2,7 +2,6 @@ package Model;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
-
 import Controller.AIPlayerController;
 import Controller.HumanPlayerController;
 import Controller.PlayerController;
@@ -36,7 +35,7 @@ public class Game {
 
 		Random rand = new Random();
 		int startingTeam = rand.nextInt(2) == 0 ? -1 : 1;
-		double angle = rand.nextDouble(-45, 45);
+		double angle = rand.nextDouble() * 90 - 45;
 		projectile = new ProjectileController(gc,
 				Constant.FIELD_WIDTH / 2 - Constant.BALL_SIZE / 2,
 				Constant.FIELD_HEIGHT / 2 - Constant.BALL_SIZE / 2,

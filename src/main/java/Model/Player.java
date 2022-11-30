@@ -20,7 +20,7 @@ public abstract class Player {
         }
         angle = base_angle;
 
-        // Tous les joueurs ont une vitesse aleatoire entre 0.0 et 1.0
+        // Tous les joueurs ont une vitesse aleatoire entre 3.0 et 3.49
         Random randomGenerator = new Random();
         speed = Constant.PLAYER_SPEED + randomGenerator.nextDouble() / 2;
     }
@@ -44,25 +44,29 @@ public abstract class Player {
         if (angle > base_angle - 60) angle -=1;
     }
 
-    /**
-     *  Deplacement en mode boost
-     */
-    void boost() {
-        x += speed*2;
-    }
-
     public Point2D getPosition() {
         return new Point2D(x, y);
     }
 
+    /**
+     * Renvoie la BoundingBox de l'objet, sert à gérer les collisions
+     */
     public BoundingBox getBoundingBox() {
         return new BoundingBox(x, y, Constant.PLAYER_WIDTH, Constant.PLAYER_HEIGHT);
     }
 
+    /**
+     * Renvoie l'angle de rotation du joueur
+     * sert à afficher la flèche avec la bonne rotation
+     */
     public double getAngle() {
         return angle;
     }
 
+    /**
+     * Renvoie l'angle de tir, en fonction de l'angle de rotation du joueur
+     * Permet de tirer le projectile dans le bon sens
+     */
     public double getShootAngle() {
         return angle - 90;
     }
@@ -75,6 +79,9 @@ public abstract class Player {
         return alive;
     }
 
+    /**
+     * Met le joueur dans l'état "mort"
+     */
     public void die() {
         speed = 0;
         alive = false;

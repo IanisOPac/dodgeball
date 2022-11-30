@@ -74,10 +74,16 @@ public class PlayerView {
         return sprite;
     }
 
+    /**
+     * Joue l'animation de tir du Sprite
+     */
     public void shoot() {
         sprite.playShoot();
     }
 
+    /**
+     * joue l'animation de mort du Sprite
+     */
     public void die() {
         sprite.playDie();
     }

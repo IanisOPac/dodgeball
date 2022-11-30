@@ -5,11 +5,9 @@ import Model.Game;
 import Util.Constant;
 import javafx.animation.AnimationTimer;
 import javafx.geometry.BoundingBox;
-import javafx.geometry.VPos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import javafx.scene.text.TextAlignment;
 
 import java.util.Random;
 
@@ -116,7 +114,7 @@ public class GameController extends Canvas {
 		requestFocus();
 	}
 
-	// Teste si un joueur se fait toucher par la balle
+	// Teste les collisions entre la balle et tous les joueurs encore en vie
 	private void checkCollision() {
 		BoundingBox projBB = gameModel.getProjectile().getBoundingBox();
 		for (PlayerController p : getActivePlayers()) {

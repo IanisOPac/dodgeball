@@ -1,8 +1,4 @@
 package Controller;
-import Model.AIPlayer;
-import Model.HumanPlayer;
-import Model.Player;
-import Util.Constant;
 import View.Sprite;
 
 import View.PlayerView;

@@ -34,15 +34,17 @@ public class Game {
 		generateTeams(gc, nb_player);
 
 		Random rand = new Random();
-		int startingTeam = rand.nextInt(2) == 0 ? -1 : 1;
-		double angle = rand.nextDouble() * 90 - 45;
+		int startingTeam = rand.nextInt(2) == 0 ? -1 : 1; // servira à envoyer le projectile d'un côté ou l'autre du terrain
+		double angle = rand.nextDouble() * 90 - 45; // angle du projectile à sa création
 		projectile = new ProjectileController(gc,
 				Constant.FIELD_WIDTH / 2 - Constant.BALL_SIZE / 2,
 				Constant.FIELD_HEIGHT / 2 - Constant.BALL_SIZE / 2,
 				angle + 90 * startingTeam);
     }
 
-	// Renvoi les joueurs vivants
+	/**
+	 * Renvoie les joueurs vivants
+ 	 */
 	public PlayerController[] getActivePlayers() {
 		ArrayList<PlayerController> result = new ArrayList<>();
 		for (PlayerController p : getPlayers()) {
@@ -51,7 +53,9 @@ public class Game {
 		return result.toArray(new PlayerController[0]);
 	}
 
-	// Renvoi les joueurs vivants qui sont du côté side passé en paramètre
+	/**
+	 * Renvoie les joueurs vivants qui sont du côté side passé en paramètre
+ 	 */
 	public PlayerController[] getActivePlayers(int side) {
 		ArrayList<PlayerController> result = new ArrayList<>();
 		for (PlayerController p : getActivePlayers()) {
@@ -60,24 +64,34 @@ public class Game {
 		return result.toArray(new PlayerController[0]);
 	}
 
-	// Renvoi les joueurs
+	/**
+	 * Renvoie tous les joueurs
+ 	 */
 	private PlayerController[] getPlayers() {
 		PlayerController[] result = Arrays.copyOf(team1, team1.length + team2.length);
 		System.arraycopy(team2, 0, result, team1.length, team2.length);
 		return result;
 	}
 
-	// Renvoi l'équipe 1
+	/**
+	 * Renvoie les joueurs de l'équipe 1
+ 	 */
     public PlayerController[] getTeam1() {
 		return team1;
 	}
 
-	// Renvoi l'équipe 2
+	/**
+	 * Renvoie les joueurs l'équipe 2
+ 	 */
 	public PlayerController[] getTeam2() {
 		return team2;
 	}
 
-	// Crée les deux équipes
+	/**
+	 * Crée les équipes avec un joueur humain et nb_player-1 bots
+	 * @param gc
+	 * @param nb_player
+	 */
 	private void generateTeams(GraphicsContext gc, int nb_player) {
 		team1[0] = new HumanPlayerController(gc, width/(nb_player +1), Constant.FIELD_HEIGHT - Constant.PLAYER_HEIGHT, "bottom", colorMap[0]);
 		team2[0] = new HumanPlayerController(gc, width/(nb_player +1), 0, "top", colorMap[1]);
@@ -88,7 +102,9 @@ public class Game {
 		}
 	}
 
-	// Renvoi le projectile
+	/**
+	 * Renvoie le projectile
+ 	 */
 	public ProjectileController getProjectile() {
 		return projectile;
 	}

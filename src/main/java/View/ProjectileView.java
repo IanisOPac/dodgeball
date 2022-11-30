@@ -6,6 +6,7 @@ import javafx.scene.image.Image;
 
 public class ProjectileView {
     GraphicsContext gc;
+    // l'image est chargée avec une taille définie dans la classe Util.Constant
     Image image = new Image("assets/ball.png", Constant.BALL_SIZE, Constant.BALL_SIZE, false, false);
 
     public ProjectileView(GraphicsContext _gc) {

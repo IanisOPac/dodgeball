@@ -86,7 +86,15 @@ public class App extends Application
 
 	}
 
-
+	/**
+	 * Création d'une partie avec nb nombre de joueur
+	 * ajout des sprites à la scene
+	 * @param root
+	 * @param vbox
+	 * @param gameC
+	 * @param nbPlayers
+	 * @param nb
+	 */
 	private void addPlayers(BorderPane root, VBox vbox, GameController gameC, Label nbPlayers, int nb) {
 		nbPlayers.setText(Integer.toString(nb));
 		gameC.newGame(nb);

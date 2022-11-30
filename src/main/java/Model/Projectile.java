@@ -15,6 +15,10 @@ public class Projectile {
         updateTrajectory();
     }
 
+    /**
+     * Calcul la valeur de déplacement que le projectile doit prendre en x et en y
+     * pour se déplacer avec l'angle donné
+     */
     private void updateTrajectory() {
         double rad_angle = angle * Math.PI / 180;
         x_velocity = Math.cos(rad_angle);
@@ -47,6 +51,10 @@ public class Projectile {
         this.y = y;
     }
 
+    /**
+     * Fonction appelée pour que le projectile se déplace avec l'angle donné
+     * @param angle
+     */
     public void move(double angle) {
         this.angle = angle;
         updateTrajectory();
@@ -57,6 +65,9 @@ public class Projectile {
         return new Point2D(x, y);
     }
 
+    /**
+     * Renvoie la BoundingBox de l'objet, sert à gérer les collisions
+     */
     public BoundingBox getBoundingBox() {
         return new BoundingBox(x, y, Constant.BALL_SIZE, Constant.BALL_SIZE);
     }

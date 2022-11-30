@@ -1,8 +1,6 @@
 package Controller;
 
 import Model.AIPlayer;
-import Util.Constant;
-import com.sun.javafx.scene.paint.GradientUtils;
 import javafx.geometry.BoundingBox;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;

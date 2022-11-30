@@ -86,6 +86,7 @@ public class App extends Application
 
 	}
 
+
 	private void addPlayers(BorderPane root, VBox vbox, GameController gameC, Label nbPlayers, int nb) {
 		nbPlayers.setText(Integer.toString(nb));
 		gameC.newGame(nb);

@@ -42,6 +42,7 @@ public class Game {
 				angle + 90 * startingTeam);
     }
 
+	// Renvoi les joueurs vivants
 	public PlayerController[] getActivePlayers() {
 		ArrayList<PlayerController> result = new ArrayList<>();
 		for (PlayerController p : getPlayers()) {
@@ -50,6 +51,7 @@ public class Game {
 		return result.toArray(new PlayerController[0]);
 	}
 
+	// Renvoi les joueurs vivants qui sont du côté side passé en paramètre
 	public PlayerController[] getActivePlayers(int side) {
 		ArrayList<PlayerController> result = new ArrayList<>();
 		for (PlayerController p : getActivePlayers()) {
@@ -58,20 +60,24 @@ public class Game {
 		return result.toArray(new PlayerController[0]);
 	}
 
+	// Renvoi les joueurs
 	private PlayerController[] getPlayers() {
 		PlayerController[] result = Arrays.copyOf(team1, team1.length + team2.length);
 		System.arraycopy(team2, 0, result, team1.length, team2.length);
 		return result;
 	}
 
+	// Renvoi l'équipe 1
     public PlayerController[] getTeam1() {
 		return team1;
 	}
 
+	// Renvoi l'équipe 2
 	public PlayerController[] getTeam2() {
 		return team2;
 	}
 
+	// Crée les deux équipes
 	private void generateTeams(GraphicsContext gc, int nb_player) {
 		team1[0] = new HumanPlayerController(gc, width/(nb_player +1), Constant.FIELD_HEIGHT - Constant.PLAYER_HEIGHT, "bottom", colorMap[0]);
 		team2[0] = new HumanPlayerController(gc, width/(nb_player +1), 0, "top", colorMap[1]);
@@ -82,6 +88,7 @@ public class Game {
 		}
 	}
 
+	// Renvoi le projectile
 	public ProjectileController getProjectile() {
 		return projectile;
 	}

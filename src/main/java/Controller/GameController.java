@@ -27,6 +27,7 @@ public class GameController extends Canvas {
 	AnimationTimer t;
 	boolean running = false;
 
+	// Constructeur de GameController
     public GameController() {
 		super(Constant.FIELD_WIDTH, Constant.FIELD_HEIGHT);
 		gc = this.getGraphicsContext2D();
@@ -104,6 +105,7 @@ public class GameController extends Canvas {
 		display();
 	}
 
+	// Réinitialise l'affichage de la fenêtre, réaffiche les joueurs, la balle, et le terrain prend le focus
 	private void display() {
 		gc.setFill(Color.LIGHTGRAY);
 		gc.fillRect(0, 0, Constant.FIELD_WIDTH, Constant.FIELD_HEIGHT);
@@ -114,6 +116,7 @@ public class GameController extends Canvas {
 		requestFocus();
 	}
 
+	// Teste si un joueur se fait toucher par la balle
 	private void checkCollision() {
 		BoundingBox projBB = gameModel.getProjectile().getBoundingBox();
 		for (PlayerController p : getActivePlayers()) {
@@ -131,6 +134,7 @@ public class GameController extends Canvas {
 		}
 	}
 
+	// // Teste les collisions, sans utilisation du type BoundingBox
 	// private boolean rectCollide(Point2D proj, int proj_size, Point2D player) {
 	// 	return proj.x + Constant.BALL_SIZE >= player.x &&
 	// 		proj.x <= player.x + Constant.PLAYER_WIDTH &&
@@ -138,6 +142,7 @@ public class GameController extends Canvas {
 	// 		proj.y <= player.y + Constant.PLAYER_HEIGHT;
 	// }
 
+	// Teste si tous les joueurs d'une équipe sont "tué", si oui, return true
 	private boolean checkVictory() {
 		PlayerController p1, p2;
 		PlayerController[] players = getActivePlayers();
@@ -151,6 +156,7 @@ public class GameController extends Canvas {
 		return true;
 	}
 
+	// Observateur qui averti les IA que le ballon est de leur côté, et qu'ils faut qu'elles aillent la récupérer
 	private void notifyAIs() {
 		int side = gameModel.getProjectile().getPosition().getY() < 50 ? 1 : -1;
 		for (PlayerController p : gameModel.getActivePlayers(side)) {
@@ -158,15 +164,19 @@ public class GameController extends Canvas {
 		}
 	}
 
+	// Renvoi tous les joueurs vivant
 	public PlayerController[] getActivePlayers() {
         return gameModel.getActivePlayers();
 	}
 
+	// Met pause au jeu
 	public void pause() {
 		if (running) t.stop();
 		else t.start();
 		running = !running;
 	}
+
+	// Crée une nouvelle partie
 	public void newGame(int nb_players) {
 		gameModel = new Game(gc, Constant.FIELD_WIDTH, Constant.FIELD_HEIGHT, nb_players);
 		display();
@@ -174,6 +184,7 @@ public class GameController extends Canvas {
 		running = false;
 	}
 
+	// Affiche dans la console qu'une équipe à gagné
 	private void printVictory(int side) {
 		String s = "";
 		if (side == 1) s += "TOP";
